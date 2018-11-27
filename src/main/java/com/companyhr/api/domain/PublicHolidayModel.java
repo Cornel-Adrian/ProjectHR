@@ -10,7 +10,7 @@ public class PublicHolidayModel extends AbstractModel {
     private String name;
 
     public PublicHolidayModel(){
-        
+
     }
 
     public int getPublicHolidayId() {
