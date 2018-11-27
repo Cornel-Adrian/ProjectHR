@@ -1,4 +1,4 @@
 package com.companyhr.api.dto;
 
-public class HrEmployeeData {
+public class DaysOffData {
 }

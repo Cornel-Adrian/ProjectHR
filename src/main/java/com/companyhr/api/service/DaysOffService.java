@@ -1,4 +1,4 @@
 package com.companyhr.api.service;
 
-public interface HrEmployeeService {
+public interface DaysOffService {
 }
