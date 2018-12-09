@@ -1,4 +1,4 @@
-package com.companyhr.api.contoller;
+package com.companyhr.api.controller;
 
 public class EmployeeCredentialsApiController {
 }
