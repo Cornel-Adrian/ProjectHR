@@ -1,0 +1,37 @@
+<!Doctype HTML>
+<html xmlns:spring="http://java.sun.com/xml/ns/javaee" xmlns:th="http://www.w3.org/1999/xhtml">
+<meta>
+</meta>
+<head>
+    <link rel="stylesheet" type="text/css" href="@{/resources/templates/loginstylesheet.css}"/>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
+</head>
+<body>
+<div class="videosection">
+    <div class="videocontainer">
+        <video autoplay loop muted poster="img/videoframe.jpg" class="video">
+            <source src="loginbackgroundvideo.mp4" type="video/mp4" class="video">
+        </video>
+    </div>
+
+</div>
+<div class="loginbox">
+
+
+    <form th:action="@{/login}" method="post" class="form", enctype="multipart/form-data">
+        <h1>Welcome!</h1>
+        <p>Username</p>
+        <div><input type="text" name="username"/></div>
+        <p>Password</p>
+        <div><input type="password" name="password"/></div>
+        <div><input type="submit" value="Sign In" class="button"></div>
+    </form>
+</div>
+
+
+</body>
+
+</html>
