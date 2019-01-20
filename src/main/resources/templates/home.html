@@ -13,5 +13,12 @@ Welcome to our App!
 <div>
     <p>Click <a th:href="@{/login}">here</a> to login to our page.</p>
 </div>
+
+<h1>New Person</h1>
+<form action="#" th:action="@{/person}" th:object="${person}" method="post">
+    <p>Name: <input type="text" th:field="*{name}"/></p>
+    <p>Age: <input type="number" th:field="*{age}"/></p>
+    <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+</form>
 </body>
 </html>

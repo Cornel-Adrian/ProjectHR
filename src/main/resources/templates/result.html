@@ -3,14 +3,9 @@
 <head>
     <title>Spring Boot: javabeginnerstutorial.com</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
 </head>
 <body>
-
-
-<p>boo</p>
-
-<div th:if="${not #lists.isEmpty(notes)}">
+<div th:if="${not #lists.isEmpty(note)}">
     <h2>Person List</h2>
     <table class="glyphicon glyphicon-calendar">
         <tr>
@@ -18,10 +13,10 @@
             <th>Name</th>
             <th>Age</th>
         </tr>
-        <tr th:each="person : ${notes}">
-            <td th:text="${notes.content}"></td>
-            <td th:text="${notes.title}"></td>
-            <td th:text="${notes.id}"></td>
+        <tr th:each="note : ${note}">
+            <td th:text="${note.id}"></td>
+            <td th:text="${note.title}"></td>
+            <td th:text="${note.content}"></td>
         </tr>
     </table>
 </div>
