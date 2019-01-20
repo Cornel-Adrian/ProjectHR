@@ -2,7 +2,7 @@ package com.companyhr.controller;
 
 import com.companyhr.exception.ResourceNotFoundException;
 import com.companyhr.model.Note;
-import com.companyhr.repository.NoteRepository;
+import com.companyhr.api.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ import java.util.List;
 public class NoteController {
 
     @Autowired
-    NoteRepository noteRepository;
+    com.companyhr.api.repository.NoteRepository noteRepository;
 
     @GetMapping("/notes")
     public List<Note> getAllNotes() {

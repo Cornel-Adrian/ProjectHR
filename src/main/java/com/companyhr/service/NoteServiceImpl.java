@@ -1,6 +1,6 @@
 package com.companyhr.service;
 import com.companyhr.model.Note;
-import com.companyhr.repository.NoteRepository;
+import com.companyhr.api.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
