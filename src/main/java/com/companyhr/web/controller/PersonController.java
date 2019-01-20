@@ -1,7 +1,9 @@
 package com.companyhr.web.controller;
 
-import com.companyhr.api.model.Person;
-import com.companyhr.api.service.PersonService;
+import com.companyhr.model.Note;
+import com.companyhr.model.Person;
+import com.companyhr.service.NoteService;
+import com.companyhr.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,23 +14,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class PersonController {
 
-    private final PersonService personService;
+    private NoteService noteService;
 
     @Autowired
-    public PersonController(PersonService personService) {
-        this.personService = personService;
+    public PersonController(NoteService noteService) {
+        this.noteService = noteService;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/greet", method = RequestMethod.GET)
     public String homePage(Model model) {
-        model.addAttribute("person", new Person());
+        model.addAttribute("note", new Note());
         return "greeting";
     }
 
-    @RequestMapping(value = "/person", method = RequestMethod.POST)
-    public String addPagePerson(@ModelAttribute Person person, Model model) {
-        personService.createPerson(person);
-        model.addAttribute("persons", personService.getAllPersons());
+    @RequestMapping(value = "/note", method = RequestMethod.POST)
+    public String addPagePerson(@ModelAttribute Note note, Model model) {
+        noteService.createNote(note);
+        model.addAttribute("persons", noteService.getAllNotes());
         return "result";
     }
 }

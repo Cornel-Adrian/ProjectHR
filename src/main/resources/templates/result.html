@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div th:if="${not #lists.isEmpty(persons)}">
+<div th:if="${not #lists.isEmpty(note)}">
     <h2>Person List</h2>
     <table class="glyphicon glyphicon-calendar">
         <tr>
@@ -13,10 +13,10 @@
             <th>Name</th>
             <th>Age</th>
         </tr>
-        <tr th:each="person : ${persons}">
-            <td th:text="${person.id}"></td>
-            <td th:text="${person.name}"></td>
-            <td th:text="${person.Age}"></td>
+        <tr th:each="note : ${note}">
+            <td th:text="${note.id}"></td>
+            <td th:text="${note.title}"></td>
+            <td th:text="${note.content}"></td>
         </tr>
     </table>
 </div>
