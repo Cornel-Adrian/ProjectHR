@@ -1,23 +1,18 @@
 <!Doctype HTML>
-<html xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<html xmlns:spring="http://java.sun.com/xml/ns/javaee" xmlns:th="http://www.w3.org/1999/xhtml">
 <meta>
 </meta>
 <head>
-    <style>
-        .body{font-family: 'Cookie';
-	text-align: center;}
-    </style>
-  <!--  <link rel="stylesheet" type="text/css" href="loginstylesheet.css}"/> -->
-    <!--<spring:url value="/resources/loginstylesheet.css" var="loginstylesheetCSS" />
-    <link href="${loginstylesheetCSS}" rel="stylesheet" />--->
-    <link href="../static/css/loginstylesheet.css" th:href="@{css/loginstylesheet.css}" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="@{loginstylesheet.css}"/>
+    <spring:url value="loginstylesheet.css" var="loginstylesheetCSS" />
+    <link href="${loginstylesheetCSS}" rel='stylesheet' />
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
 </head>
 <body>
-<div class="videosection" style="font-family: 'Cookie';">
+<div class="videosection">
     <div class="videocontainer">
         <video autoplay loop muted poster="img/videoframe.jpg" class="video">
             <source src="loginbackgroundvideo.mp4" type="video/mp4" class="video">
