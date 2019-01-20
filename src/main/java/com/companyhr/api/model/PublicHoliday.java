@@ -10,20 +10,20 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
-@Table(name = "notes")
+@Table(name = "public_holiday")
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
-public class Note {
+public class PublicHoliday {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    private String title;
+    private Date start_date;
 
     @NotBlank
-    private String content;
+    private Date end_date;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -43,20 +43,20 @@ public class Note {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Date getStart_date() {
+        return start_date;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
     }
 
-    public String getContent() {
-        return content;
+    public Date getEnd_date() {
+        return end_date;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setEnd_date(Date end_date) {
+        this.end_date = end_date;
     }
 
     public Date getCreatedAt() {
@@ -74,5 +74,4 @@ public class Note {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 }
