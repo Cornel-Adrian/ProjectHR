@@ -17,10 +17,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/home","/api/notes/").permitAll()
+                .antMatchers("/", "/home","/api/notes/","/greeting","/result").permitAll()
                 .anyRequest().authenticated()
                 .and()
-
             .formLogin()
                 .loginPage("/login")
                 .failureUrl("/error")
