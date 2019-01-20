@@ -1,4 +1,4 @@
-package com.companyhr.api.repository;
+package com.companyhr.repository;
 
 
 import com.companyhr.model.Note;
