@@ -1,7 +1,7 @@
 package com.companyhr.controller;
 
-import com.companyhr.api.model.PublicHoliday;
-import com.companyhr.api.repository.PublicHolidayRepository;
+import com.companyhr.model.PublicHoliday;
+import com.companyhr.repository.PublicHolidayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

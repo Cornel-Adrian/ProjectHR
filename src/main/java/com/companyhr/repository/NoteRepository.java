@@ -1,10 +1,9 @@
-package com.companyhr.api.repository;
+package com.companyhr.repository;
 
 
-import com.companyhr.api.model.Note;
+import com.companyhr.model.Note;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.companyhr.api.model.Note;
 
 import java.util.List;
 
