@@ -25,7 +25,7 @@ public class PublicHoliday {
     @NotBlank
     private Date end_date;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = true)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     private Date createdAt;
