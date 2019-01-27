@@ -20,10 +20,10 @@ public class PublicHoliday {
     private Long id;
 
     @NotBlank
-    private Date start_date;
+    private Date startDate;
 
     @NotBlank
-    private Date end_date;
+    private Date endDate;
 
     @Column(nullable = false, updatable = true)
     @Temporal(TemporalType.TIMESTAMP)
@@ -43,20 +43,20 @@ public class PublicHoliday {
         this.id = id;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Date getCreatedAt() {
