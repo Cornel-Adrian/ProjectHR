@@ -47,15 +47,15 @@ public class EmployeeApiController {
     public Employee updateEmployee(@PathVariable(value = "id") Long employeeId, @Valid @RequestBody Employee employeeDetails) {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee", "id", employeeId));
-        employee.setFirst_name(employeeDetails.getFirst_name());
-        employee.setLast_name(employeeDetails.getLast_name());
+        employee.setFirstName(employeeDetails.getFirstName());
+        employee.setLastName(employeeDetails.getLastName());
         employee.setAddress(employeeDetails.getAddress());
         employee.setExperience(employeeDetails.getExperience());
-        employee.setJob_id(employeeDetails.getJob_id());
+        employee.setJobId(employeeDetails.getJobId());
         employee.setSalary(employeeDetails.getSalary());
-        employee.setEmployment_date(employeeDetails.getEmployment_date());
+        employee.setEmploymentDate(employeeDetails.getEmploymentDate());
         employee.setExperience(employeeDetails.getExperience());
-        employee.setDepartment_id(employeeDetails.getDepartment_id());
+        employee.setDepartmentId(employeeDetails.getDepartmentId());
 
         Employee updatedEmployee = employeeRepository.save(employee);
         return updatedEmployee;

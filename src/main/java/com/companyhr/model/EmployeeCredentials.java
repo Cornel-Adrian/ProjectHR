@@ -20,7 +20,7 @@ public class EmployeeCredentials {
     private Long id;
 
     @NotBlank
-    private Long employee_id;
+    private Long employeeId;
 
     @NotBlank
     private String username;
@@ -29,7 +29,7 @@ public class EmployeeCredentials {
     private String password;
 
     @NotBlank
-    private Long job_id;
+    private Long jobId;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,12 +49,12 @@ public class EmployeeCredentials {
         this.id = id;
     }
 
-    public Long getEmployee_id() {
-        return employee_id;
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee_id(Long employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getUsername() {
@@ -73,12 +73,12 @@ public class EmployeeCredentials {
         this.password = password;
     }
 
-    public Long getJob_id() {
-        return job_id;
+    public Long getJobId() {
+        return jobId;
     }
 
-    public void setJob_id(Long job_id) {
-        this.job_id = job_id;
+    public void setJobId(Long jobId) {
+        this.jobId = jobId;
     }
 
     public Date getCreatedAt() {
