@@ -21,18 +21,21 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/result").setViewName("result");
         registry.addViewController("/registration").setViewName("registration");
         registry.addViewController("/welcome").setViewName("welcome");
-
-
     }
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(
-
-                "/resources/**")
+                "/webjars/**",
+                "/img/**",
+                "/css/**",
+                "/js/**")
                 .addResourceLocations(
-                        "classpath:/resources/"
-                );
+                        "classpath:/META-INF/resources/webjars/",
+                        "classpath:/static/img/",
+                        "classpath:/static/css/",
+                        "classpath:/static/js/");
     }
+
 }
 
 

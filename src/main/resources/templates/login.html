@@ -1,14 +1,16 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<!DOCTYPE html>
 
 <html xmlns:spring="http://java.sun.com/xml/ns/javaee" xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
-<meta>
-</meta>
 <head>
-    <link rel="stylesheet" type="text/css" href="@{loginstylesheet.css}"/>
-    <spring:url value="loginstylesheet.css" var="loginstylesheetCSS" />
-    <link href="${loginstylesheetCSS}" rel='stylesheet' />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>DAEa</title>
+    <base href="/">
+    </meta>
+    <link href="/css/common.css" th:href="@{/css/common.css}" type="text/css" rel="stylesheet" />
+    <link href="../static/css/common.css" th:href="@{/css/common.css}" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}"/>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
@@ -24,8 +26,6 @@
 
 </div>
 <div class="loginbox">
-
-
     <form th:action="@{/login}" method="post" class="form", enctype="multipart/form-data">
         <h1>Welcome!</h1>
         <p>Username</p>
