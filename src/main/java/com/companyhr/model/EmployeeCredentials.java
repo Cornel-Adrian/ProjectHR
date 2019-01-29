@@ -31,6 +31,10 @@ public class EmployeeCredentials {
     @NotBlank
     private Long jobId;
 
+    @NotBlank
+    private String passwordConfirm;
+
+
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -95,5 +99,10 @@ public class EmployeeCredentials {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Transient
+    public String getPasswordConfirm() {
+        return passwordConfirm;
     }
 }
