@@ -3,7 +3,6 @@ package com.companyhr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +21,7 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -37,20 +38,30 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-                .antMatchers("/", "/home", "/api/notes/", "/greeting", "/result", "/resources/**", "/registration", "/welcome").permitAll()
+                .csrf()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/", "/api/notes/", "/greeting", "/result", "/resources/**",
+                        "/registration", "/welcome", "/accesdenied").permitAll()
+                //.antMatchers("/restricted/**").hasRole("ADMIN")
+                .antMatchers("/home").hasRole("ADMIN")
+                .antMatchers("/restricted/afterlogin").authenticated()
                 .anyRequest().authenticated()
                 .and()
-            .formLogin()
+                .formLogin()
                 .loginPage("/login")
-                .failureUrl("/error")
+                .failureUrl("/accesdenied")
+                .defaultSuccessUrl("/restricted/afterlogin")
                 .permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/error")
-                .and()
-             .logout()
+                .logout()
                 .permitAll()
-                .and().exceptionHandling().accessDeniedPage("/error");
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login")
+                .and().exceptionHandling().accessDeniedPage("/accesdenied");
 
     }
 
@@ -79,4 +90,5 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
+
 }

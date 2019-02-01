@@ -13,7 +13,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
 
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("home");
+        registry.addViewController("/").setViewName("welcome");
         registry.addViewController("/home").setViewName("home");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/notes").setViewName("notes");
@@ -21,6 +21,11 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/result").setViewName("result");
         registry.addViewController("/registration").setViewName("registration");
         registry.addViewController("/welcome").setViewName("welcome");
+        registry.addViewController("/restricted/afterlogin").setViewName("/restricted/afterlogin");
+        registry.addViewController("/accesdenied").setViewName("accesdenied");
+        //registry.addViewController("/logout").setViewName("logout");
+
+
     }
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

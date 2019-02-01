@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 
-<html xmlns:spring="http://java.sun.com/xml/ns/javaee" xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}"/>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
 </head>
 <body>
-<p>dada</p>
+<box class="box">
+    <p>Welcome to our app</p>
+    <p>What would you like to do?</p>
+    <form action="/login">
+        <input type="submit" value="Login" class="button"/>
+    </form>
+    <form action="/registration">
+        <input type="submit" value="Register" class="button"/>
+    </form>
+
+</box>
 </body>
 </html>
