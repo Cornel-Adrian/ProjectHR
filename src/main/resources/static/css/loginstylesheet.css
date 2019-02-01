@@ -1,0 +1,80 @@
+.loginbox{
+    overflow: hidden;
+	position: absolute;
+	width: 400px;
+	height: 400px;
+	top: 45%;
+	left:50%;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	z-index: 1;
+	opacity: 0.75;
+	background: url("formbackground.jpg");
+	border-radius: 50%;
+	overflow: hidden;
+	}
+
+.button{
+	
+   color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  font-family: 'Cookie';
+  
+background-color: #87CEFA;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+margin-top: 25px;
+}
+
+
+.loginbox form{
+	color:  black;
+	font-size:34px;
+	font-family: 'Cookie';
+	text-align: center;
+	vertical-align: center;
+	text-shadow: 2px 2px #87CEFA;
+	padding: 0;
+	margin: 0;
+
+}
+.loginbox form p{
+	color: black;
+	margin: 0;
+	padding: 0;
+	font-weight: bolder;
+	font-family: 'Cookie';
+	font-size: 22px;
+	text-align: center;
+	padding: 0;
+	text-shadow: none;
+	
+}
+
+@media (min-aspect-ratio: 16/9) {
+  .video{
+    height: 300%;
+    top: -100%;
+  }
+}
+
+@media (max-aspect-ratio: 16/9) {
+  .video{
+    width: 300%;
+    left: -100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .videosection{
+    background: url('loginbackgroundvideo.mp4') center center / cover no-repeat;
+  }
+
+  .video{
+    display: none;
+  }
+}
