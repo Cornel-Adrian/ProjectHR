@@ -46,6 +46,7 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/restricted/**").hasRole("ADMIN")
                 .antMatchers("/home").hasRole("ADMIN")
                 .antMatchers("/restricted/afterlogin").authenticated()
+                .antMatchers("/registrationdetails").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

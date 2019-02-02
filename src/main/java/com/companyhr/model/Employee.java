@@ -4,9 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -15,33 +18,36 @@ import java.util.Date;
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
 public class Employee {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private String firstName;
+    @NotEmpty
+    private String first_name;
 
-    @NotBlank
-    private String lastName;
+    @NotEmpty
+    private String last_name;
 
     @NotBlank
     private String address;
 
-    @NotBlank
-    private Long jobId;
+    @NotNull
+    private Long job_id;
 
-    @NotBlank
+    @NotNull
     private Double salary;
 
-    @NotBlank
-    private Date employmentDate;
+    @com.sun.istack.internal.NotNull
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy.MM.dd")
+    private Date employment_date;
 
-    @NotBlank
+    @NotNull
     private Integer experience;
 
-    @NotBlank
-    private Integer departmentId;
+    @com.sun.istack.internal.NotNull
+    private Integer department_id;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -54,20 +60,20 @@ public class Employee {
     private Date updatedAt;
 
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getAddress() {
@@ -78,12 +84,12 @@ public class Employee {
         this.address = address;
     }
 
-    public Long getJobId() {
-        return jobId;
+    public Long getJob_id() {
+        return job_id;
     }
 
-    public void setJobId(Long jobId) {
-        this.jobId = jobId;
+    public void setJob_id(Long job_id) {
+        this.job_id = job_id;
     }
 
     public Double getSalary() {
@@ -94,12 +100,12 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Date getEmploymentDate() {
-        return employmentDate;
+    public Date getEmployment_date() {
+        return employment_date;
     }
 
-    public void setEmploymentDate(Date employmentDate) {
-        this.employmentDate = employmentDate;
+    public void setEmployment_date(Date employment_date) {
+        this.employment_date = employment_date;
     }
 
     public Integer getExperience() {
@@ -110,12 +116,12 @@ public class Employee {
         this.experience = experience;
     }
 
-    public Integer getDepartmentId() {
-        return departmentId;
+    public Integer getDepartment_id() {
+        return department_id;
     }
 
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
+    public void setDepartment_id(Integer department_id) {
+        this.department_id = department_id;
     }
 
     public Date getCreatedAt() {
@@ -128,6 +134,14 @@ public class Employee {
 
     public Date getUpdatedAt() {
         return updatedAt;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setUpdatedAt(Date updatedAt) {
