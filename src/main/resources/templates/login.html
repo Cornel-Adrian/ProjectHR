@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 
-<html xmlns:spring="http://java.sun.com/xml/ns/javaee" xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>DAEa</title>
+    <title>Login</title>
     <base href="/">
     </meta>
-    <link href="/css/common.css" th:href="@{/css/common.css}" type="text/css" rel="stylesheet" />
-    <link href="../static/css/common.css" th:href="@{/css/common.css}" type="text/css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" th:href="@{/css/common.css}"/>
+    <link href="/css/common.css" th:href="@{/css/loginstylesheet.css}" type="text/css" rel="stylesheet"/>
+    <link href="../static/css/common.css" th:href="@{/css/loginstylesheet.css}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/loginstylesheet.css}"/>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
 </head>
-<body>
-<div class="videosection">
+<body style="background-color:lightblue;">
+<!--<div class="videosection">
     <div class="videocontainer">
         <video autoplay loop muted poster="img/videoframe.jpg" class="video">
             <source src="loginbackgroundvideo.mp4" type="video/mp4" class="video">
         </video>
-    </div>
+    </div>-->
 
 </div>
 <div class="loginbox">
-    <form th:action="@{/login}" method="post" class="form", enctype="multipart/form-data">
+    <form action="#" th:action="@{/login}" th:object="${userForm}" method="post" class="form"
+          enctype="multipart/form-data">
         <h1>Welcome!</h1>
         <p>Username</p>
         <div><input type="text" name="username"/></div>
         <p>Password</p>
         <div><input type="password" name="password"/></div>
         <div><input type="submit" value="Sign In" class="button"></div>
+        <p th:text="${message}">message</p>
+        <input type="hidden" name="${message}" value="${message.token}"/>
     </form>
 </div>
 

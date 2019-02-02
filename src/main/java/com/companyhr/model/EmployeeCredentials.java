@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -19,8 +20,8 @@ public class EmployeeCredentials {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private Long employeeId;
+    @NotNull
+    private Long employee_id;
 
     @NotBlank
     private String username;
@@ -28,11 +29,11 @@ public class EmployeeCredentials {
     @NotBlank
     private String password;
 
-    @NotBlank
-    private Long jobId;
+    @NotNull
+    private Long job_id;
 
     @NotBlank
-    private String passwordConfirm;
+    private String password_confirm;
 
 
     @Column(nullable = false, updatable = false)
@@ -53,12 +54,12 @@ public class EmployeeCredentials {
         this.id = id;
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public Long getEmployee_id() {
+        return employee_id;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee_id(Long employee_id) {
+        this.employee_id = employee_id;
     }
 
     public String getUsername() {
@@ -77,12 +78,12 @@ public class EmployeeCredentials {
         this.password = password;
     }
 
-    public Long getJobId() {
-        return jobId;
+    public Long getJob_id() {
+        return job_id;
     }
 
-    public void setJobId(Long jobId) {
-        this.jobId = jobId;
+    public void setJob_id(Long job_id) {
+        this.job_id = job_id;
     }
 
     public Date getCreatedAt() {
@@ -101,8 +102,11 @@ public class EmployeeCredentials {
         this.updatedAt = updatedAt;
     }
 
-    @Transient
-    public String getPasswordConfirm() {
-        return passwordConfirm;
+    public String getPassword_confirm() {
+        return password_confirm;
+    }
+
+    public void setPassword_confirm(String password_confirm) {
+        this.password_confirm = password_confirm;
     }
 }

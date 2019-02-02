@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Registration</title>
+    <base href="/">
+    </meta>
+    <link href="/css/common.css" th:href="@{/css/registrationdetails.css}" type="text/css" rel="stylesheet"/>
+    <link href="../static/css/common.css" th:href="@{/css/registrationdetails.css}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registrationdetails.css}"/>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
+</head>
+<body>
+<div class="registrationbox">
+    <form action="#" th:action="@{/registrationdetails}" th:object="${userForm}" method="post">
+        <p>Please fill in your registration details</p>
+        <p></p>
+        <p></p>
+        <p>First Name</p>
+        <p1><input type="text" name="first_name"/></p1>
+        <p>Last Name</p>
+        <p1><input type="text" name="last_name"/></p1>
+        <p>Adress</p>
+        <p1><input type="text" name="address"/></p1>
+        <p>Department ID</p>
+        <p1><input type="number" name="department_id"/></p1>
+        <p>Experience</p>
+        <p1><input type="number" name="experience"/></p1>
+        <p>Salary</p>
+        <p1><input type="number" name="salary"/></p1>
+        <p>Employment Date</p>
+        <p1><input type="date" name="employment_date"/></p1>
+        <p></p>
+        <p1><input type="submit" value="Submit" class="button"/></p1>
+    </form>
+</div>
+</body>
+</html>
