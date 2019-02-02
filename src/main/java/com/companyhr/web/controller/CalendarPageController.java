@@ -1,6 +1,6 @@
 package com.companyhr.web.controller;
 
-import com.companyhr.api.model.CustomDate;
+import com.companyhr.model.CustomDate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,9 +26,9 @@ public class CalendarPageController {
 
     public List<CustomDate> setBankHolidays(List<CustomDate> workCalendar, List<String> bankHolidays) {
         for (String bankHoliday : bankHolidays) {
-            CustomDate date = new CustomDate(bankHoliday);
+            CustomDate customDate = new CustomDate(bankHoliday);
             for (int i = 0; i < workCalendar.size(); i++) {
-                if (date.equals(workCalendar.get(i))) {
+                if (customDate.equals(workCalendar.get(i))) {
                     workCalendar.get(i).setBankHoliday(true);
                     break;
                 }
@@ -40,9 +40,9 @@ public class CalendarPageController {
     @RequestMapping(value = "/addBankHoliday", method = RequestMethod.POST)
 
     public List<CustomDate> addBankHoliday(List<CustomDate> workCalendar, String dateAsString) {
-        CustomDate date = new CustomDate(dateAsString);
+        CustomDate customDate = new CustomDate(dateAsString);
         for (int i = 0; i < workCalendar.size(); i++) {
-            if (date.equals(workCalendar.get(i))) {
+            if (customDate.equals(workCalendar.get(i))) {
                 workCalendar.get(i).setBankHoliday(true);
                 break;
             }

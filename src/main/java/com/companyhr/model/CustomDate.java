@@ -1,13 +1,12 @@
-package com.companyhr.api.model;
+package com.companyhr.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class CustomDate {
-    Date date;
+    java.util.Date date;
     Boolean bankHoliday;
     String dayOfWeek;
 
@@ -65,11 +64,11 @@ public class CustomDate {
         return Objects.equals(date, that.date);
     }
 
-    public Date getDate() {
+    public java.util.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.util.Date date) {
         this.date = date;
     }
 

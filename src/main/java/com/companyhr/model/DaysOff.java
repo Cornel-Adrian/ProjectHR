@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -20,22 +21,20 @@ public class DaysOff {
     private Long id;
 
     @NotBlank
-    private Integer employeeId;
+    private Long employeeId;
 
-    @NotBlank
-    private Date startDate;
+    private Date start_date;
 
-    @NotBlank
+    @NotNull
     private Date endDate;
 
     @NotBlank
     private String reasonLeave;
 
     @NotBlank
-    private Integer status;
+    private Long status;
 
-    @NotBlank
-    private Integer daysOffTypeId;
+    private Long daysOffTypeId;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -55,20 +54,20 @@ public class DaysOff {
         this.id = id;
     }
 
-    public Integer getEmployeeId() {
+    public Long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Integer employeeId) {
+    public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getStart_date() {
+        return start_date;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
     }
 
     public Date getEndDate() {
@@ -87,19 +86,19 @@ public class DaysOff {
         this.reasonLeave = reasonLeave;
     }
 
-    public Integer getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 
-    public Integer getDaysOffTypeId() {
+    public Long getDaysOffTypeId() {
         return daysOffTypeId;
     }
 
-    public void setDaysOffTypeId(Integer daysOffTypeId) {
+    public void setDaysOffTypeId(Long daysOffTypeId) {
         this.daysOffTypeId = daysOffTypeId;
     }
 

@@ -68,10 +68,12 @@ public class LoginPageController {
     public String registration(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
         userValidator.validate(employeeCredentials, bindingResult);
 
+
         if (bindingResult.hasErrors()) {
             return "registration";
         }
 
+        employeeCredentials.setDaysOffCredits(25);
         employeeService.save(employeeCredentials);
 
         securityService.autologin(employeeCredentials.getUsername(), employeeCredentials.getPassword());
@@ -89,6 +91,7 @@ public class LoginPageController {
         String currentPrincipalName = authentication.getName();
         employee.setJob_id(employeeService.findByUsername(currentPrincipalName).getJob_id());
         employee.setId(employeeService.findByUsername(currentPrincipalName).getId());
+
 
         employeeService.save(employee);
 
