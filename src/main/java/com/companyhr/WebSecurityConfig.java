@@ -45,6 +45,7 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/registration", "/welcome", "/accesdenied").permitAll()
                 //.antMatchers("/restricted/**").hasRole("ADMIN")
                 .antMatchers("/home").hasRole("ADMIN")
+                .antMatchers("/addholidayhr").hasRole("HR")
                 .antMatchers("/restricted/afterlogin").authenticated()
                 .antMatchers("/registrationdetails").authenticated()
                 .anyRequest().authenticated()
