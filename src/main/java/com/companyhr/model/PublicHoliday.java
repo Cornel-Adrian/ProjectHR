@@ -1,7 +1,6 @@
 package com.companyhr.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.internal.NotNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -20,11 +19,11 @@ public class PublicHoliday {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private Date start_date;
+    @NotBlank
+    private Date startDate;
 
-    @NotNull
-    private Date end_date;
+    @NotBlank
+    private Date endDate;
     @NotBlank
     private String name;
 
@@ -54,20 +53,20 @@ public class PublicHoliday {
         this.id = id;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public void setEndDate(Date end_date) {
+        this.endDate = end_date;
     }
 
     public Date getCreatedAt() {

@@ -90,7 +90,7 @@ public class EmployeePageController {
         List<java.util.Date> serviceList = new ArrayList<>();
         List<PublicHoliday> allPublicHoliday = publicHolidayRepository.findAll();
         for (int i = 0; i < allPublicHoliday.size(); i++) {
-            serviceList.addAll(publicHolidayRepository.findByStartDateBetween(allPublicHoliday.get(i).getStartDate(), allPublicHoliday.get(i).getEndDate()));
+            serviceList.addAll(publicHolidayRepository.findByStartDateBetween(allPublicHoliday.get(i).getStartDate(), allPublicHoliday.get(i).getEnd_date()));
             bankHoliday += serviceList.size();
 
 
