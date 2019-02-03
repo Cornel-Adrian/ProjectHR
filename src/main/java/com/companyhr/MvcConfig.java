@@ -31,6 +31,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/restricted/afterlogin").setViewName("/restricted/afterlogin");
         registry.addViewController("/accesdenied").setViewName("accesdenied");
         registry.addViewController("/adddayoff").setViewName("adddayoff");
+        registry.addViewController("/setcredits").setViewName("setcredits");
         //registry.addViewController("/logout").setViewName("logout");
 
 
@@ -65,6 +66,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
         return conversionService;
     }
+
 }
 
 

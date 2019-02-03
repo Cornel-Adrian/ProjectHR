@@ -1,7 +1,9 @@
 package com.companyhr.web.controller;
 
+import com.companyhr.controller.EmployeeCredentialsApiController;
 import com.companyhr.model.Employee;
 import com.companyhr.model.EmployeeCredentials;
+import com.companyhr.repository.EmployeeCredentialsRepository;
 import com.companyhr.service.EmployeeService;
 import com.companyhr.service.SecurityService;
 import com.companyhr.validator.UserValidator;
@@ -42,6 +44,12 @@ public class LoginPageController {
     @Autowired
     private UserValidator userValidator;
 
+    @Autowired
+    EmployeeCredentialsRepository employeeCredentialsRepository;
+
+    @Autowired
+    EmployeeCredentialsApiController employeeCredentialsApiController;
+
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -73,12 +81,37 @@ public class LoginPageController {
             return "registration";
         }
 
-        employeeCredentials.setDaysOffCredits(25);
+        employeeCredentials.setDays_off_credits(25);
         employeeService.save(employeeCredentials);
 
         securityService.autologin(employeeCredentials.getUsername(), employeeCredentials.getPassword());
 
         return "redirect:/registrationdetails";
+    }
+
+    @RequestMapping(value = "/setcredits", method = RequestMethod.GET)
+    public String setCredits(Model model) {
+        model.addAttribute("userForm", new EmployeeCredentials());
+
+        return "setcredits";
+    }
+
+    @RequestMapping(value = "/setcredits", method = RequestMethod.POST)
+    public String setCredits(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
+
+        String username;
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        employeeCredentials.setUsername(username);
+        employeeCredentialsApiController.updateEmployeeCredentials(employeeCredentials);
+
+
+        return "redirect:/restricted/afterlogin";
     }
 
     @RequestMapping(value = "/registrationdetails", method = RequestMethod.POST)
@@ -95,7 +128,7 @@ public class LoginPageController {
 
         employeeService.save(employee);
 
-        return "redirect:/restricted/afterlogin";
+        return "redirect:/setcredits";
     }
 
 

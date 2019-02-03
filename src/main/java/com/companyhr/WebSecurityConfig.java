@@ -48,6 +48,8 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/restricted/afterlogin").authenticated()
                 .antMatchers("/registrationdetails").authenticated()
                 .antMatchers("/adddayoff").authenticated()
+                .antMatchers("/setcredits").authenticated()
+
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

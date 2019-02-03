@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +49,20 @@ public class EmployeePageController {
         webDataBinder.registerCustomEditor(java.util.Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+    @RequestMapping(value = "/adddayoff", method = RequestMethod.GET)
+    public String registration(Model model) {
+        model.addAttribute("userForm", new DaysOff());
 
-    @RequestMapping(value = "/addDayOff", method = RequestMethod.POST)
+        return "adddayoff";
+    }
+
+    @RequestMapping(value = "/adddayoff", method = RequestMethod.POST)
     public String registration(@ModelAttribute("daysOff") DaysOff daysOff, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "adddayoff";
+        }
+
 
         String username;
 
@@ -62,19 +74,14 @@ public class EmployeePageController {
         }
 
         PublicHolidayConverter publicHolidayConverter = new PublicHolidayConverter();
-        int credits = (int) employeeCredentialsRepository.findByUsername(username).getDaysOffCredits();
-
-
-        String startDate = new String(Integer.toString(daysOff.getStart_date().getDay()) + "/" +
-                Integer.toString(daysOff.getStart_date().getMonth()) + Integer.toString(daysOff.getStart_date().getYear()));
-        String endDate = new String(Integer.toString(daysOff.getEndDate().getDay()) + "/" +
-                Integer.toString(daysOff.getEndDate().getMonth()) + Integer.toString(daysOff.getEndDate().getYear()));
-
-        List<CustomDate> between = publicHolidayConverter.getWorkCalendar( startDate, endDate);
-
-
-        LocalDate startDateLocale = LocalDate.of(daysOff.getStart_date().getDay(), daysOff.getStart_date().getMonth(), daysOff.getStart_date().getYear());
-        LocalDate endDateLocale = LocalDate.of(daysOff.getEndDate().getDay(), daysOff.getEndDate().getMonth(), daysOff.getEndDate().getYear());
+        int credits = (int) employeeCredentialsRepository.findByUsername(username).getDays_off_credits();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String startDate = formatter.format(LocalDate.parse(simpleDateFormat.format(daysOff.getStart_date()), formatter));
+        String endDate = formatter.format(LocalDate.parse(simpleDateFormat.format(daysOff.getEnd_date()), formatter));
+        List<CustomDate> between = publicHolidayConverter.getWorkCalendar(startDate, endDate);
+        LocalDate startDateLocale = LocalDate.parse(simpleDateFormat.format(daysOff.getStart_date()), formatter);
+        LocalDate endDateLocale = LocalDate.parse(simpleDateFormat.format(daysOff.getEnd_date()), formatter);
 
 
         int days = (int) ChronoUnit.DAYS.between(startDateLocale, endDateLocale);
@@ -83,7 +90,7 @@ public class EmployeePageController {
         List<java.util.Date> serviceList = new ArrayList<>();
         List<PublicHoliday> allPublicHoliday = publicHolidayRepository.findAll();
         for (int i = 0; i < allPublicHoliday.size(); i++) {
-            serviceList.addAll( publicHolidayRepository.findByStartDateBetween(allPublicHoliday.get(i).getStartDate(), allPublicHoliday.get(i).getEndDate()));
+            serviceList.addAll(publicHolidayRepository.findByStartDateBetween(allPublicHoliday.get(i).getStartDate(), allPublicHoliday.get(i).getEndDate()));
             bankHoliday += serviceList.size();
 
 
@@ -99,21 +106,17 @@ public class EmployeePageController {
 
 
         if (credits - (days - bankHoliday - weekend) <= 0) {
-            return "addDaysOff";
+            return "adddayoff";
         }
 
         if (credits == 0) {
-            return "addDayOff";
+            return "adddayoff";
         }
 
 
-        if (bindingResult.hasErrors()) {
-            return "addDayOff";
-        }
-
-
-        daysOff.setEmployeeId(employeeCredentialsRepository.findByUsername(username).getEmployee_id());
+        daysOff.setEmployee_id(employeeCredentialsRepository.findByUsername(username).getEmployee_id());
         daysOff.setDaysOffTypeId(Long.valueOf(1));
+        daysOff.setStatus(Long.valueOf(0));
         daysOffRepository.save(daysOff);
         return "/restricted/afterlogin";
     }

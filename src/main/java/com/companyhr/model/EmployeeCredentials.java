@@ -36,7 +36,7 @@ public class EmployeeCredentials {
     private String password_confirm;
 
     @NotNull
-    private long daysOffCredits;
+    private long days_off_credits;
 
 
     @Column(nullable = false, updatable = false)
@@ -114,11 +114,11 @@ public class EmployeeCredentials {
     }
 
 
-    public long getDaysOffCredits() {
-        return daysOffCredits;
+    public long getDays_off_credits() {
+        return days_off_credits;
     }
 
-    public void setDaysOffCredits(long daysOffCredits) {
-        this.daysOffCredits = daysOffCredits;
+    public void setDays_off_credits(long days_off_credits) {
+        this.days_off_credits = days_off_credits;
     }
 }

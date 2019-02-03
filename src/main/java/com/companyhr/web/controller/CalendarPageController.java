@@ -1,6 +1,7 @@
 package com.companyhr.web.controller;
 
 import com.companyhr.model.CustomDate;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -8,8 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Controller
 public class CalendarPageController {
-
 
     @RequestMapping(value = "/showBankHolidays", method = RequestMethod.GET)
     public List<CustomDate> getBankHolidays(List<CustomDate> workCalendar) {

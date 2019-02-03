@@ -20,18 +20,25 @@ public class DaysOff {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private Long employeeId;
+
+    private Long employee_id;
 
     private Date start_date;
 
     @NotNull
-    private Date endDate;
-
+    private Date end_date;
     @NotBlank
-    private String reasonLeave;
 
-    @NotBlank
+    private String reason_leave;
+
+    public String getReason_leave() {
+        return reason_leave;
+    }
+
+    public void setReason_leave(String reason_leave) {
+        this.reason_leave = reason_leave;
+    }
+
     private Long status;
 
     private Long daysOffTypeId;
@@ -54,12 +61,12 @@ public class DaysOff {
         this.id = id;
     }
 
-    public Long getEmployeeId() {
-        return employeeId;
+    public Long getEmployee_id() {
+        return employee_id;
     }
 
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee_id(Long employee_id) {
+        this.employee_id = employee_id;
     }
 
     public Date getStart_date() {
@@ -70,20 +77,20 @@ public class DaysOff {
         this.start_date = start_date;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getEnd_date() {
+        return end_date;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEnd_date(Date end_date) {
+        this.end_date = end_date;
     }
 
     public String getReasonLeave() {
-        return reasonLeave;
+        return reason_leave;
     }
 
     public void setReasonLeave(String reasonLeave) {
-        this.reasonLeave = reasonLeave;
+        this.reason_leave = reasonLeave;
     }
 
     public Long getStatus() {
