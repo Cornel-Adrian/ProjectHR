@@ -5,7 +5,6 @@ import com.companyhr.model.EmployeeCredentials;
 import com.companyhr.repository.EmployeeCredentialsRepository;
 import com.companyhr.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,8 +17,7 @@ import java.util.Optional;
 @Controller
 
 public class UserHomePageControler {
-    @Value("{currentEmployeeDetails}")
-    EmployeeDetails employeeDetails;
+
     @Autowired
     EmployeeCredentialsRepository employeeCredentialsRepository;
     @Autowired
@@ -28,7 +26,7 @@ public class UserHomePageControler {
     @RequestMapping(value = "/viewpersonaldetails", method = RequestMethod.GET)
 
     public String viewpersonaldetails(Model model) {
-        // EmployeeDetails employeeDetails= new EmployeeDetails();
+        EmployeeDetails employeeDetails = new EmployeeDetails();
         String username1;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
@@ -40,7 +38,7 @@ public class UserHomePageControler {
         EmployeeCredentials employeeCredentials = employeeCredentialsRepository.findByUsername(username1);
         employeeDetails.setUsername(employeeCredentials.getUsername());
 
-        Optional<Employee> employee = employeeRepository.findById(employeeCredentials.getEmployee_id());
+        Optional<Employee> employee = employeeRepository.findById(employeeCredentials.getId());
         if (employee.isPresent()) {
             Employee newEmployee = employee.get();
             employeeDetails.setName(newEmployee.getFirst_name() + " " + newEmployee.getLast_name());
@@ -67,7 +65,7 @@ public class UserHomePageControler {
 //            model.addAttribute("departmentid", newEmployee.getDepartment_id().toString());
 //            model.addAttribute("salary", newEmployee.getSalary().toString());
         }
-
+        model.addAttribute("employeeDetails", employeeDetails);
         return "restricted/viewpersonaldetails";
     }
 }
