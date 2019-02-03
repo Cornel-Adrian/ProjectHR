@@ -1,0 +1,73 @@
+body {
+  background-image: url("formbackground.jpg");
+
+}
+
+.addholidayhr{
+
+	position: relative;
+	width: 600px;
+	height: 800px;
+	margin-left: auto;
+    margin-right: auto;
+    margin-up: auto;
+    margin-down: auto;
+	box-sizing: content-box;
+	z-index: 1;
+	opacity: 1;
+	overflow: hidden;
+	}
+
+.button{
+
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  font-family: 'Cookie';
+
+background-color: #87CEFA;
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+position:center;
+}
+
+
+.addholidayhr form{
+	color:  black;
+	font-size:34px;
+	font-family: 'Cookie';
+	text-align: center;
+	vertical-align: center;
+	horizontal-align:center;
+	text-shadow: 2px 2px #87CEFA;
+	padding: 0;
+	margin: 0;
+
+}
+.addholidayhr form p{
+	color: white;
+	margin: 5px;
+	padding: 5px;
+	font-weight: bold;
+	font-family: 'Cookie';
+	font-size: 30px;
+	text-align: center;
+	padding: 0;
+	text-shadow: none;
+
+}
+.addholidayhr form p1{
+	color: black;
+	margin: 5px;
+	padding: 5px;
+	  width: 100%;
+	font-weight: bolder;
+	font-family: 'Cookie';
+	font-size: 22px;
+	text-align: left;
+	padding: 0;
+	text-shadow: none;
+}

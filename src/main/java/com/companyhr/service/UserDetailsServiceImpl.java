@@ -32,8 +32,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         EmployeeCredentials employeeCredentials = employeeCredentialsRepository.findByUsername(username);
         if (employeeCredentials.getJob_id().toString().equals("1")) {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        if (employeeCredentials.getJob_id().toString().equals("2")) {
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_HR"));
         } else {
-            grantedAuthorities.add(new SimpleGrantedAuthority("SIMPLEUSER"));
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_SIMPLEUSER"));
         }
         return new org.springframework.security.core.userdetails.User
                 (employeeCredentials.getUsername(), employeeCredentials.getPassword(), grantedAuthorities);
