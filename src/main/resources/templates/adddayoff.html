@@ -18,16 +18,16 @@
 </head>
 <body>
 <div class="registrationbox">
-    <form action="#" th:action="@{/addDayOff}" th:object="${userForm}" method="post">
+    <form action="#" th:action="@{/adddayoff}" th:object="${userForm}" method="post">
         <p>Please fill in your Day Off details</p>
         <p></p>
         <p></p>
         <p>Start Date</p>
-        <p1><input type="Date" name="startDate"/></p1>
+        <p1><input type="Date" name="start_date"/></p1>
         <p>End Date</p>
-        <p1><input type="Date" name="endDate"/></p1>
+        <p1><input type="Date" name="end_date"/></p1>
         <p>Reason</p>
-        <p1><input type="text" name="reasonLeave"/></p1>
+        <p1><input type="text" name="reason_leave"/></p1>
         <p1><input type="submit" value="Submit" class="button"/></p1>
     </form>
 </div>

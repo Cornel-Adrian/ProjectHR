@@ -65,8 +65,8 @@ public class PublicHoliday {
         return endDate;
     }
 
-    public void setEndDate(Date end_date) {
-        this.endDate = end_date;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Date getCreatedAt() {
