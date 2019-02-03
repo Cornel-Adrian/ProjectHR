@@ -38,6 +38,10 @@ public class Employee {
     @NotNull
     private Double salary;
 
+    @NotNull
+    private long daysOffCredits;
+
+
     @com.sun.istack.internal.NotNull
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy.MM.dd")

@@ -35,6 +35,9 @@ public class EmployeeCredentials {
     @NotBlank
     private String password_confirm;
 
+    @NotNull
+    private long days_off_credits;
+
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -108,5 +111,14 @@ public class EmployeeCredentials {
 
     public void setPassword_confirm(String password_confirm) {
         this.password_confirm = password_confirm;
+    }
+
+
+    public long getDays_off_credits() {
+        return days_off_credits;
+    }
+
+    public void setDays_off_credits(long days_off_credits) {
+        this.days_off_credits = days_off_credits;
     }
 }

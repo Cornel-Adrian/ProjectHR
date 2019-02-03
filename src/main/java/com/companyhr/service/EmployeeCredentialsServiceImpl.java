@@ -19,4 +19,13 @@ public class EmployeeCredentialsServiceImpl implements EmployeeCredentialsServic
         return false;
     }
 
+    public EmployeeCredentials updateEmployeeCredentials(EmployeeCredentials employeeDetails) {
+        String username = new String(employeeDetails.getUsername());
+        EmployeeCredentials employee = employeeCredentialsRepository.findByUsername(username);
+        employee.setDays_off_credits(employeeDetails.getDays_off_credits());
+        EmployeeCredentials updatedEmployee = employeeCredentialsRepository.save(employee);
+        return updatedEmployee;
+    }
+
 }
+

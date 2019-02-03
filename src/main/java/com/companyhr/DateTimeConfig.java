@@ -19,7 +19,7 @@ class DateTimeConfig {
         DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
         /*registrar.setDateFormatter(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         registrar.setDateTimeFormatter(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));*/
-        registrar.setDateFormatter(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+        registrar.setDateFormatter(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         registrar.registerFormatters(conversionService);
 
 
