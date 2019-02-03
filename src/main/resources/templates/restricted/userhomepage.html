@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/userhomepage.css}"/>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
+</head>
+<body>
+<box class="box">
+    <p>Welcome to your personal page</p>
+    <p>What would you like to do?</p>
+    <form action="/logout">
+        <input type="submit" value="Logout" class="button"/>
+    </form>
+    <form action="/adddayoff">
+        <input type="submit" value="Request holiday" class="button"/>
+    </form>
+    <form action="/viewcredits">
+        <input type="submit" value="View Credits" class="button"/>
+    </form>
+    <form action="/viewpersonaldetails">
+        <input type="submit" value="View Personal Details" class="button"/>
+    </form>
+
+</box>
+</body>
+</html>

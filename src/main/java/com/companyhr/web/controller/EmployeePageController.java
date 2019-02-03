@@ -3,6 +3,7 @@ package com.companyhr.web.controller;
 import com.companyhr.converter.PublicHolidayConverter;
 import com.companyhr.model.CustomDate;
 import com.companyhr.model.DaysOff;
+import com.companyhr.model.EmployeeCredentials;
 import com.companyhr.model.PublicHoliday;
 import com.companyhr.repository.DaysOffRepository;
 import com.companyhr.repository.EmployeeCredentialsRepository;
@@ -120,6 +121,30 @@ public class EmployeePageController {
         daysOffRepository.save(daysOff);
         return "/restricted/afterlogin";
     }
+
+    @RequestMapping(value = "/userhomepage", method = RequestMethod.GET)
+    public String userhomepage(Model model) {
+        model.addAttribute("userForm", new EmployeeCredentials());
+
+        return "restricted/userhomepage";
+    }
+
+    @RequestMapping(value = "/userhomepage", method = RequestMethod.POST)
+    public String userhomepage(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
+
+
+        return "restricted/userhomepage";
+    }
+
+
+//    @RequestMapping (value = "/viewpersonaldetails", method = RequestMethod.POST)
+//    public String viewpersonaldetails(ModelMap model, @RequestParam String username, @RequestParam String name, @RequestMapping String role, @RequestMapping String employeeid, @RequestMapping String departmentid, @RequestMapping String salary){
+//model.put("username", );
+//
+//}
+//
+//        return "restricted/userhomepage";
+    //}
 
 
 }

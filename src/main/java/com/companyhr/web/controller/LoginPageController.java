@@ -107,11 +107,16 @@ public class LoginPageController {
         } else {
             username = principal.toString();
         }
-        employeeCredentials.setUsername(username);
-        employeeCredentialsApiController.updateEmployeeCredentials(employeeCredentials);
+        //employeeCredentials.setUsername(username);
+        // employeeCredentialsApiController.updateEmployeeCredentials(employeeCredentials);
+        if (employeeCredentials.getJob_id() == 2) {
+            return "redirect:/restricted/hrhomepage";
+        }
+        if (employeeCredentials.getJob_id() == 1) {
+            return "redirect:/restricted/adminhomepage";
+        }
 
-
-        return "redirect:/restricted/afterlogin";
+        return "redirect:/restricted/userhomepage";
     }
 
     @RequestMapping(value = "/registrationdetails", method = RequestMethod.POST)
