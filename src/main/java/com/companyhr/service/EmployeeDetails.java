@@ -1,5 +1,8 @@
-package com.companyhr.web.controller;
+package com.companyhr.service;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class EmployeeDetails {
     private String username;
     private String name;

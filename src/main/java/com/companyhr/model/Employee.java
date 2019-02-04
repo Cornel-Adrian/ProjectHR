@@ -39,7 +39,15 @@ public class Employee {
     private Double salary;
 
     @NotNull
-    private long daysOffCredits;
+    private long days_off_credits;
+
+    public long getDays_off_credits() {
+        return days_off_credits;
+    }
+
+    public void setDays_off_credits(long days_off_credits) {
+        this.days_off_credits = days_off_credits;
+    }
 
 
     @com.sun.istack.internal.NotNull

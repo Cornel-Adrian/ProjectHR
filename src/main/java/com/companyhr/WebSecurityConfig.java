@@ -58,7 +58,6 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/accesdenied")
-                .defaultSuccessUrl("/restricted/afterlogin")
                 .permitAll()
                 .and()
                 .logout()

@@ -15,7 +15,7 @@
 <body>
 <box class="box">
     <p>This are your personal details</p>
-    <p>username<span th: text="${employeeDetails.username}"></span></p>
+    <p>username<span th: itemref="${employeeDetails.username}" var="username"></span></p>
 
 
 </box>

@@ -107,12 +107,14 @@ public class LoginPageController {
         } else {
             username = principal.toString();
         }
-        //employeeCredentials.setUsername(username);
-        // employeeCredentialsApiController.updateEmployeeCredentials(employeeCredentials);
-        if (employeeCredentials.getJob_id() == 2) {
+        employeeCredentials.setUsername(username);
+        employeeCredentialsApiController.updateEmployeeCredentials(employeeCredentials);
+        EmployeeCredentials employeeCredentials1 = employeeCredentialsRepository.findByUsername(username);
+
+        if (employeeCredentials1.getJob_id() == 2) {
             return "redirect:/restricted/hrhomepage";
         }
-        if (employeeCredentials.getJob_id() == 1) {
+        if (employeeCredentials1.getJob_id() == 1) {
             return "redirect:/restricted/adminhomepage";
         }
 
@@ -129,7 +131,9 @@ public class LoginPageController {
         String currentPrincipalName = authentication.getName();
         employee.setJob_id(employeeService.findByUsername(currentPrincipalName).getJob_id());
         employee.setId(employeeService.findByUsername(currentPrincipalName).getId());
-
+        EmployeeCredentials employeeCredentials = employeeCredentialsRepository.findByUsername(currentPrincipalName);
+        employeeCredentials.setDays_off_credits(employee.getDays_off_credits());
+        employeeService.save(employeeCredentials);
 
         employeeService.save(employee);
 
@@ -164,11 +168,23 @@ public class LoginPageController {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, employeeCredentials.getPassword(), userDetails.getAuthorities());
         securityService.autologin(employeeCredentials.getUsername(), employeeCredentials.getPassword());
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-        if (usernamePasswordAuthenticationToken.isAuthenticated()) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        EmployeeCredentials employeeCredentials1 = employeeCredentialsRepository.findByUsername(((UserDetails) principal).getUsername());
+        if ((employeeCredentials1.getJob_id() == 2)) {
+            return "/restricted/hrhomepage";
+        }
+        if (employeeCredentials.getJob_id() == 1) {
+            return "restricted/adminhomepage";
+        }
+        return "/restricted/userhomepage";
+    }
+
+
+        /*if (usernamePasswordAuthenticationToken.isAuthenticated()) {
             return "redirect:/restricted/afterlogin";
         } else {
             return "login";
-        }
+        }*/
 
     }
 
@@ -180,7 +196,7 @@ public class LoginPageController {
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");*/
 
-}
+
 
    /* public String welcome(Model model) {
         return "welcome";

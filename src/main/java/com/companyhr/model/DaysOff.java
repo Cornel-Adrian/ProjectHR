@@ -85,13 +85,6 @@ public class DaysOff {
         this.end_date = end_date;
     }
 
-    public String getReasonLeave() {
-        return reason_leave;
-    }
-
-    public void setReasonLeave(String reasonLeave) {
-        this.reason_leave = reasonLeave;
-    }
 
     public Long getStatus() {
         return status;
