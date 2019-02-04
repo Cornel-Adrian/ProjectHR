@@ -50,7 +50,7 @@ public class Employee {
     }
 
 
-    @com.sun.istack.internal.NotNull
+    @NotNull
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy.MM.dd")
     private Date employment_date;
@@ -58,7 +58,7 @@ public class Employee {
     @NotNull
     private Integer experience;
 
-    @com.sun.istack.internal.NotNull
+    @NotNull
     private Integer department_id;
 
     @Column(nullable = false, updatable = false)

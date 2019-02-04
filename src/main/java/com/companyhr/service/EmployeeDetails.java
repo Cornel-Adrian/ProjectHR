@@ -2,9 +2,12 @@ package com.companyhr.service;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
+
 @Service
 public class EmployeeDetails {
-    private String username;
+    public String username;
     private String name;
     private String role;
     private String employeeid;
@@ -57,5 +60,36 @@ public class EmployeeDetails {
 
     public void setSalary(String salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EmployeeDetails)) return false;
+        EmployeeDetails that = (EmployeeDetails) o;
+        return Objects.equals(getUsername(), that.getUsername()) &&
+                Objects.equals(getName(), that.getName()) &&
+                Objects.equals(getRole(), that.getRole()) &&
+                Objects.equals(getEmployeeid(), that.getEmployeeid()) &&
+                Objects.equals(getDeparmentid(), that.getDeparmentid()) &&
+                Objects.equals(getSalary(), that.getSalary());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getUsername(), getName(), getRole(), getEmployeeid(), getDeparmentid(), getSalary());
+    }
+
+    @Override
+    public String toString() {
+        return "EmployeeDetails{" +
+                "username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                ", employeeid='" + employeeid + '\'' +
+                ", deparmentid='" + deparmentid + '\'' +
+                ", salary='" + salary + '\'' +
+                '}';
     }
 }

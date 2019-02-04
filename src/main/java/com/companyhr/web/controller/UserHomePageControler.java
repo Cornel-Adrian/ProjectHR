@@ -10,13 +10,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
+
 
 public class UserHomePageControler {
 
@@ -24,11 +27,24 @@ public class UserHomePageControler {
     EmployeeCredentialsRepository employeeCredentialsRepository;
     @Autowired
     EmployeeRepository employeeRepository;
+    @Autowired
+    EmployeeDetails employeeDetails;
+
+    /*@RequestMapping(value = "/viewpersonaldetails", method = RequestMethod.GET)
+
+    public ModelAndView viewpersonaldetails(){
+            return new ModelAndView("restricted/viewpersonaldetails", "employeeDetails", new EmployeeDetails());
+        }*/
 
     @RequestMapping(value = "/viewpersonaldetails", method = RequestMethod.GET)
-    //public String viewpersonaldetails(@ModelAttribute("employeeDetails") EmployeeDetails employeeDetails, Model model) {
+    public ModelAndView viewpersonaldetails(Model model) {
 
-    public String viewpersonaldetails(@ModelAttribute("employeeDetails") EmployeeDetails employeeDetails, Model model) {
+
+        //@GetMapping(value = "/viewpersonaldetails")
+        //public String viewpersonaldetails(@ModelAttribute("employeeDetails") EmployeeDetails employeeDetails, Model model) {
+
+        //public String viewpersonaldetails(ModelMap map) {
+        // EmployeeDetails employeeDetails= new EmployeeDetails();
         String username1;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
@@ -36,13 +52,14 @@ public class UserHomePageControler {
         } else {
             username1 = principal.toString();
         }
+        Map<String, EmployeeDetails> map = new HashMap<>();
 
         EmployeeCredentials employeeCredentials = employeeCredentialsRepository.findByUsername(username1);
         employeeDetails.setUsername(employeeCredentials.getUsername());
 
-        Optional<Employee> employee = employeeRepository.findById(employeeCredentials.getId());
-        if (employee.isPresent()) {
-            Employee newEmployee = employee.get();
+        Optional<Employee> employee1 = employeeRepository.findById(employeeCredentials.getId());
+        if (employee1.isPresent()) {
+            Employee newEmployee = employee1.get();
 
             employeeDetails.setName(newEmployee.getFirst_name() + " " + newEmployee.getLast_name());
 
@@ -58,8 +75,13 @@ public class UserHomePageControler {
             employeeDetails.setEmployeeid(employeeCredentials.getEmployee_id().toString());
             employeeDetails.setDeparmentid(newEmployee.getDepartment_id().toString());
             employeeDetails.setSalary(newEmployee.getSalary().toString());
+            //map.put("employeeDetails",employeeDetails);
             model.addAttribute("employeeDetails", employeeDetails);
+
+            //   map.addAttribute("employeeDetails", employeeDetails);
+
+
         }
-        return "restricted/viewpersonaldetails";
+        return new ModelAndView("restricted/viewpersonaldetails", "employeeDetails", model);
     }
 }
