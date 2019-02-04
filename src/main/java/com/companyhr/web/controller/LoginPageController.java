@@ -80,8 +80,7 @@ public class LoginPageController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-
-        employeeCredentials.setDays_off_credits(25);
+        
         employeeService.save(employeeCredentials);
 
         securityService.autologin(employeeCredentials.getUsername(), employeeCredentials.getPassword());
@@ -133,7 +132,6 @@ public class LoginPageController {
         employee.setId(employeeService.findByUsername(currentPrincipalName).getId());
         EmployeeCredentials employeeCredentials = employeeCredentialsRepository.findByUsername(currentPrincipalName);
         employeeCredentials.setDays_off_credits(employee.getDays_off_credits());
-        employeeService.save(employeeCredentials);
 
         employeeService.save(employee);
 
