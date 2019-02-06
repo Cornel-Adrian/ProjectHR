@@ -24,42 +24,39 @@ public class Employee {
     private Long id;
 
     @NotEmpty
-    private String first_name;
+    private String firstName;
 
     @NotEmpty
-    private String last_name;
+    private String lastName;
 
     @NotBlank
     private String address;
 
     @NotNull
-    private Long job_id;
+    private Long jobId;
 
     @NotNull
     private Double salary;
 
     @NotNull
-    private long days_off_credits;
-
-    public long getDays_off_credits() {
-        return days_off_credits;
-    }
-
-    public void setDays_off_credits(long days_off_credits) {
-        this.days_off_credits = days_off_credits;
-    }
-
-
+    private long daysOffCredits;
     @NotNull
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy.MM.dd")
-    private Date employment_date;
+    private Date employmentDate;
+    @NotNull
+    private Integer departmentId;
+
+    public long getDaysOffCredits() {
+        return daysOffCredits;
+    }
 
     @NotNull
     private Integer experience;
 
-    @NotNull
-    private Integer department_id;
+    public void setDaysOffCredits(long daysOffCredits) {
+        this.daysOffCredits = daysOffCredits;
+    }
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -71,21 +68,20 @@ public class Employee {
     @LastModifiedDate
     private Date updatedAt;
 
-
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -96,12 +92,12 @@ public class Employee {
         this.address = address;
     }
 
-    public Long getJob_id() {
-        return job_id;
+    public Long getJobId() {
+        return jobId;
     }
 
-    public void setJob_id(Long job_id) {
-        this.job_id = job_id;
+    public void setJobId(Long jobId) {
+        this.jobId = jobId;
     }
 
     public Double getSalary() {
@@ -112,12 +108,12 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Date getEmployment_date() {
-        return employment_date;
+    public Date getEmploymentDate() {
+        return employmentDate;
     }
 
-    public void setEmployment_date(Date employment_date) {
-        this.employment_date = employment_date;
+    public void setEmploymentDate(Date employmentDate) {
+        this.employmentDate = employmentDate;
     }
 
     public Integer getExperience() {
@@ -128,12 +124,12 @@ public class Employee {
         this.experience = experience;
     }
 
-    public Integer getDepartment_id() {
-        return department_id;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment_id(Integer department_id) {
-        this.department_id = department_id;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
     public Date getCreatedAt() {

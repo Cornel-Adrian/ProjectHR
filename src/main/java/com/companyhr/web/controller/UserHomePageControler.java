@@ -61,19 +61,19 @@ public class UserHomePageControler {
         if (employee1.isPresent()) {
             Employee newEmployee = employee1.get();
 
-            employeeDetails.setName(newEmployee.getFirst_name() + " " + newEmployee.getLast_name());
+            employeeDetails.setName(newEmployee.getFirstName() + " " + newEmployee.getLastName());
 
-            if (employeeCredentials.getJob_id() == 1) {
+            if (employeeCredentials.getJobId() == 1) {
                 employeeDetails.setRole("admin");
             } else {
-                if (employeeCredentials.getJob_id() == 2) {
+                if (employeeCredentials.getJobId() == 2) {
                     employeeDetails.setRole("HR");
                 } else {
                     employeeDetails.setRole("user");
                 }
             }
-            employeeDetails.setEmployeeid(employeeCredentials.getEmployee_id().toString());
-            employeeDetails.setDeparmentid(newEmployee.getDepartment_id().toString());
+            employeeDetails.setEmployeeid(employeeCredentials.getEmployeeId().toString());
+            employeeDetails.setDeparmentid(newEmployee.getDepartmentId().toString());
             employeeDetails.setSalary(newEmployee.getSalary().toString());
             //map.put("employeeDetails",employeeDetails);
             model.addAttribute("employeeDetails", employeeDetails);

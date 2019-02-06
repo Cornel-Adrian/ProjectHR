@@ -75,7 +75,7 @@ public class EmployeePageController {
         }
 
         PublicHolidayConverter publicHolidayConverter = new PublicHolidayConverter();
-        int credits = (int) employeeCredentialsRepository.findByUsername(username).getDays_off_credits();
+        int credits = (int) employeeCredentialsRepository.findByUsername(username).getDaysOffCredits();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String startDate = formatter.format(LocalDate.parse(simpleDateFormat.format(daysOff.getStartDate()), formatter));
@@ -115,7 +115,7 @@ public class EmployeePageController {
         }
 
 
-        daysOff.setEmployeeId(employeeCredentialsRepository.findByUsername(username).getEmployee_id());
+        daysOff.setEmployeeId(employeeCredentialsRepository.findByUsername(username).getEmployeeId());
         daysOff.setDaysOffTypeId(Long.valueOf(1));
         daysOff.setStatus(Long.valueOf(0));
         daysOffRepository.save(daysOff);
@@ -149,7 +149,7 @@ public class EmployeePageController {
             username = principal.toString();
         }
 
-        Long employeeId = employeeCredentialsRepository.findByUsername(username).getEmployee_id();
+        Long employeeId = employeeCredentialsRepository.findByUsername(username).getEmployeeId();
 
         model.addAttribute("daysoff", daysOffRepository.findByemployeeId(employeeId));
         return "viewvacancies";

@@ -23,12 +23,13 @@ public class DaysOff {
 
     private Long employeeId;
 
+    @NotNull
     private Date startDate;
 
     @NotNull
     private Date endDate;
-    @NotBlank
 
+    @NotBlank
     private String reasonLeave;
 
     public String getReasonLeave() {

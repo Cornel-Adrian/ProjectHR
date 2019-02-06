@@ -110,10 +110,10 @@ public class LoginPageController {
         employeeCredentialsApiController.updateEmployeeCredentials(employeeCredentials);
         EmployeeCredentials employeeCredentials1 = employeeCredentialsRepository.findByUsername(username);
 
-        if (employeeCredentials1.getJob_id() == 2) {
+        if (employeeCredentials1.getJobId() == 2) {
             return "redirect:/restricted/hrhomepage";
         }
-        if (employeeCredentials1.getJob_id() == 1) {
+        if (employeeCredentials1.getJobId() == 1) {
             return "redirect:/restricted/adminhomepage";
         }
 
@@ -128,10 +128,10 @@ public class LoginPageController {
         }*/
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
-        employee.setJob_id(employeeService.findByUsername(currentPrincipalName).getJob_id());
+        employee.setJobId(employeeService.findByUsername(currentPrincipalName).getJobId());
         employee.setId(employeeService.findByUsername(currentPrincipalName).getId());
         EmployeeCredentials employeeCredentials = employeeCredentialsRepository.findByUsername(currentPrincipalName);
-        employeeCredentials.setDays_off_credits(employee.getDays_off_credits());
+        employeeCredentials.setDaysOffCredits(employee.getDaysOffCredits());
 
         employeeService.save(employee);
 
@@ -168,10 +168,10 @@ public class LoginPageController {
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         EmployeeCredentials employeeCredentials1 = employeeCredentialsRepository.findByUsername(((UserDetails) principal).getUsername());
-        if ((employeeCredentials1.getJob_id() == 2)) {
+        if ((employeeCredentials1.getJobId() == 2)) {
             return "/restricted/hrhomepage";
         }
-        if (employeeCredentials.getJob_id() == 1) {
+        if (employeeCredentials.getJobId() == 1) {
             return "restricted/adminhomepage";
         }
         return "/restricted/userhomepage";

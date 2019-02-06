@@ -21,7 +21,7 @@ public class EmployeeCredentials {
     private Long id;
 
     @NotNull
-    private Long employee_id;
+    private Long employeeId;
 
     @NotBlank
     private String username;
@@ -30,13 +30,13 @@ public class EmployeeCredentials {
     private String password;
 
     @NotNull
-    private Long job_id;
+    private Long jobId;
 
     @NotBlank
-    private String password_confirm;
+    private String passwordConfirm;
 
     @NotNull
-    private long days_off_credits;
+    private long daysOffCredits;
 
 
     @Column(nullable = false, updatable = false)
@@ -57,12 +57,12 @@ public class EmployeeCredentials {
         this.id = id;
     }
 
-    public Long getEmployee_id() {
-        return employee_id;
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee_id(Long employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getUsername() {
@@ -81,12 +81,12 @@ public class EmployeeCredentials {
         this.password = password;
     }
 
-    public Long getJob_id() {
-        return job_id;
+    public Long getJobId() {
+        return jobId;
     }
 
-    public void setJob_id(Long job_id) {
-        this.job_id = job_id;
+    public void setJobId(Long jobId) {
+        this.jobId = jobId;
     }
 
     public Date getCreatedAt() {
@@ -105,20 +105,20 @@ public class EmployeeCredentials {
         this.updatedAt = updatedAt;
     }
 
-    public String getPassword_confirm() {
-        return password_confirm;
+    public String getPasswordConfirm() {
+        return passwordConfirm;
     }
 
-    public void setPassword_confirm(String password_confirm) {
-        this.password_confirm = password_confirm;
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
 
-    public long getDays_off_credits() {
-        return days_off_credits;
+    public long getDaysOffCredits() {
+        return daysOffCredits;
     }
 
-    public void setDays_off_credits(long days_off_credits) {
-        this.days_off_credits = days_off_credits;
+    public void setDaysOffCredits(long daysOffCredits) {
+        this.daysOffCredits = daysOffCredits;
     }
 }

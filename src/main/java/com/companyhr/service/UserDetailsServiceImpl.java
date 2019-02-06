@@ -30,10 +30,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         EmployeeCredentials employeeCredentials = employeeCredentialsRepository.findByUsername(username);
-        if (employeeCredentials.getJob_id().toString().equals("1")) {
+        if (employeeCredentials.getJobId().toString().equals("1")) {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         }
-        if (employeeCredentials.getJob_id().toString().equals("2")) {
+        if (employeeCredentials.getJobId().toString().equals("2")) {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_HR"));
         } else {
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_SIMPLEUSER"));

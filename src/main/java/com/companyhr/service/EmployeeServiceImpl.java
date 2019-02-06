@@ -23,9 +23,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         newEmployeeCredentials.setUsername(employeeCredentials.getUsername());
         CharSequence password = employeeCredentials.getPassword();
         newEmployeeCredentials.setPassword(bCryptPasswordEncoder.encode(password));
-        newEmployeeCredentials.setPassword_confirm(bCryptPasswordEncoder.encode(password));
-        newEmployeeCredentials.setEmployee_id(employeeCredentials.getEmployee_id());
-        newEmployeeCredentials.setJob_id(employeeCredentials.getJob_id());
+        newEmployeeCredentials.setPasswordConfirm(bCryptPasswordEncoder.encode(password));
+        newEmployeeCredentials.setEmployeeId(employeeCredentials.getEmployeeId());
+        newEmployeeCredentials.setJobId(employeeCredentials.getJobId());
         employeeCredentialsRepository.save(newEmployeeCredentials);
     }
 

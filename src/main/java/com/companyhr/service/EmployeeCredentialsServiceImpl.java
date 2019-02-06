@@ -22,7 +22,7 @@ public class EmployeeCredentialsServiceImpl implements EmployeeCredentialsServic
     public EmployeeCredentials updateEmployeeCredentials(EmployeeCredentials employeeDetails) {
         String username = new String(employeeDetails.getUsername());
         EmployeeCredentials employee = employeeCredentialsRepository.findByUsername(username);
-        employee.setDays_off_credits(employeeDetails.getDays_off_credits());
+        employee.setDaysOffCredits(employeeDetails.getDaysOffCredits());
         EmployeeCredentials updatedEmployee = employeeCredentialsRepository.save(employee);
         return updatedEmployee;
     }
