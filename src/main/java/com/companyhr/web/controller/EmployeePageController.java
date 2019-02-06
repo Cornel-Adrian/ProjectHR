@@ -78,11 +78,11 @@ public class EmployeePageController {
         int credits = (int) employeeCredentialsRepository.findByUsername(username).getDays_off_credits();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String startDate = formatter.format(LocalDate.parse(simpleDateFormat.format(daysOff.getStart_date()), formatter));
-        String endDate = formatter.format(LocalDate.parse(simpleDateFormat.format(daysOff.getEnd_date()), formatter));
+        String startDate = formatter.format(LocalDate.parse(simpleDateFormat.format(daysOff.getStartDate()), formatter));
+        String endDate = formatter.format(LocalDate.parse(simpleDateFormat.format(daysOff.getEndDate()), formatter));
         List<CustomDate> between = publicHolidayConverter.getWorkCalendar(startDate, endDate);
-        LocalDate startDateLocale = LocalDate.parse(simpleDateFormat.format(daysOff.getStart_date()), formatter);
-        LocalDate endDateLocale = LocalDate.parse(simpleDateFormat.format(daysOff.getEnd_date()), formatter);
+        LocalDate startDateLocale = LocalDate.parse(simpleDateFormat.format(daysOff.getStartDate()), formatter);
+        LocalDate endDateLocale = LocalDate.parse(simpleDateFormat.format(daysOff.getEndDate()), formatter);
 
 
         int days = (int) ChronoUnit.DAYS.between(startDateLocale, endDateLocale);
@@ -115,7 +115,7 @@ public class EmployeePageController {
         }
 
 
-        daysOff.setEmployee_id(employeeCredentialsRepository.findByUsername(username).getEmployee_id());
+        daysOff.setEmployeeId(employeeCredentialsRepository.findByUsername(username).getEmployee_id());
         daysOff.setDaysOffTypeId(Long.valueOf(1));
         daysOff.setStatus(Long.valueOf(0));
         daysOffRepository.save(daysOff);
@@ -135,6 +135,27 @@ public class EmployeePageController {
 
         return "restricted/userhomepage";
     }
+
+
+    @RequestMapping("/viewvacancies")
+    public String countsList(Model model) {
+
+        String username;
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        Long employeeId = employeeCredentialsRepository.findByUsername(username).getEmployee_id();
+
+        model.addAttribute("daysoff", daysOffRepository.findByemployeeId(employeeId));
+        return "viewvacancies";
+    }
+
+
 
 
 //    @RequestMapping (value = "/viewpersonaldetails", method = RequestMethod.POST)

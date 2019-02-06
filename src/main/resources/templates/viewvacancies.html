@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View days off</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/css/common.css" th:href="@{/css/registration.css}" type="text/css" rel="stylesheet"/>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
+</head>
+<body>
+<div th:if="${not #lists.isEmpty(daysoff)}">
+    <h2>Vacancies </h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Reason Leave</th>
+        </tr>
+        <tr th:each="count : ${daysoff}">
+            <td th:text="${count.startDate}"></td>
+            <td th:text="${count.endDate}"></td>
+            <td th:text="${count.reasonLeave}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

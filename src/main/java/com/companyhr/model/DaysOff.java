@@ -21,22 +21,22 @@ public class DaysOff {
     private Long id;
 
 
-    private Long employee_id;
+    private Long employeeId;
 
-    private Date start_date;
+    private Date startDate;
 
     @NotNull
-    private Date end_date;
+    private Date endDate;
     @NotBlank
 
-    private String reason_leave;
+    private String reasonLeave;
 
-    public String getReason_leave() {
-        return reason_leave;
+    public String getReasonLeave() {
+        return reasonLeave;
     }
 
-    public void setReason_leave(String reason_leave) {
-        this.reason_leave = reason_leave;
+    public void setReasonLeave(String reasonLeave) {
+        this.reasonLeave = reasonLeave;
     }
 
     private Long status;
@@ -61,28 +61,28 @@ public class DaysOff {
         this.id = id;
     }
 
-    public Long getEmployee_id() {
-        return employee_id;
+    public Long getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee_id(Long employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public Date getStart_date() {
-        return start_date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getEnd_date() {
-        return end_date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
 
