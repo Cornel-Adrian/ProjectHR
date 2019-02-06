@@ -94,7 +94,6 @@ public class EmployeePageController {
             serviceList.addAll(publicHolidayRepository.findByStartDateBetween(allPublicHoliday.get(i).getStartDate(), allPublicHoliday.get(i).getEndDate()));
             bankHoliday += serviceList.size();
 
-
         }
 
         int weekend = 0;
@@ -107,12 +106,18 @@ public class EmployeePageController {
 
 
         if (credits - (days - bankHoliday - weekend) <= 0) {
-            return "adddayoff";
+
+            return "/restricted/afterlogin";
         }
 
         if (credits == 0) {
             return "adddayoff";
         }
+
+        Long total = Long.valueOf(credits - ((days - bankHoliday) - weekend));
+        EmployeeCredentials temp = employeeCredentialsRepository.findByUsername(username);
+        temp.setDaysOffCredits(total);
+        employeeCredentialsRepository.save(temp);
 
 
         daysOff.setEmployeeId(employeeCredentialsRepository.findByUsername(username).getEmployeeId());
