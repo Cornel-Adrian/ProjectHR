@@ -8,22 +8,39 @@
     <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+          rel="stylesheet">
 </head>
 <body>
-<div th:if="${not #lists.isEmpty(daysoff)}">
+<p> In Method</p>
     <h2>Vacancies </h2>
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered">
+        <thead>
         <tr>
             <th>Start Date</th>
             <th>End Date</th>
-            <th>Reason Leave</th>
+            <th>Reason</th>
         </tr>
-        <tr th:each="count : ${daysoff}">
-            <td th:text="${count.startDate}"></td>
-            <td th:text="${count.endDate}"></td>
-            <td th:text="${count.reasonLeave}"></td>
+        </thead>
+        <tbody>
+        <tr th:if="${daysoff.empty}">
+            <td colspan="2"> No DaysOff found </td>
         </tr>
+        <tr th:each="dayOff : ${daysoff}">
+            <td><span th:text="${dayOff.startDate}"> Start Date </span></td>
+            <td><span th:text="${dayOff.endDate}"> End Date</span></td>
+            <td><span th:text="${dayOff.reasonLeave}"> Reason</span></td>
+        </tr>
+        </tbody>
     </table>
+
+<div class="form-container">
+    <h1>Download Days Off Log </h1>
+    Click on below links to get the logs.<br/><br/>
+    <a href="/download/download">Download this file.</a>
+    <br/>
+    <a href="/download/browser">Open the file in browser.</a>
 </div>
+
 </body>
 </html>

@@ -160,6 +160,26 @@ public class EmployeePageController {
         return "viewvacancies";
     }
 
+    @RequestMapping("/viewallvacancies")
+    public String viewAllVacancies(Model model) {
+
+        String username;
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+        List<DaysOff> listOfdays=daysOffRepository.findAll();
+
+        model.addAttribute("daysoff", listOfdays);
+       for(DaysOff days: listOfdays){
+           System.out.println(days.getReasonLeave());
+        }
+        return "viewvacancies";
+    }
+
 
 
 

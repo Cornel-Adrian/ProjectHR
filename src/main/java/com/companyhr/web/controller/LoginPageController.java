@@ -114,7 +114,7 @@ public class LoginPageController {
             return "redirect:/restricted/hrhomepage";
         }
         if (employeeCredentials1.getJobId() == 1) {
-            return "redirect:/restricted/adminhomepage";
+            return "redirect:/restricted/userhomepage";
         }
 
         return "redirect:/restricted/userhomepage";

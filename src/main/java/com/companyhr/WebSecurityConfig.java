@@ -53,7 +53,7 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/adddayoff").authenticated()
                 .antMatchers("/setcredits").authenticated()
                 .antMatchers("/viewvacancies").authenticated()
-
+                .antMatchers("/viewAllDaysOff").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
