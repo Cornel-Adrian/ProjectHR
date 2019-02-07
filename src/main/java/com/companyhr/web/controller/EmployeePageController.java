@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -180,7 +181,23 @@ public class EmployeePageController {
         return "viewvacancies";
     }
 
+    @RequestMapping("/restricted/viewcredits")
+    public String listcredits(Model model) {
 
+        String username;
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        List<EmployeeCredentials> employeeId = Collections.singletonList(employeeCredentialsRepository.findByUsername(username));
+
+        model.addAttribute("daysoff", employeeId);
+        return "/restricted/viewcredits";
+    }
 
 
 //    @RequestMapping (value = "/viewpersonaldetails", method = RequestMethod.POST)

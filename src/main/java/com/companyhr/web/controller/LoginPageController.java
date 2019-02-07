@@ -147,7 +147,7 @@ public class LoginPageController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String dologin(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
-//        userValidator.validate(employeeCredentials, bindingResult);
+        userValidator.validatelogin(employeeCredentials, bindingResult);
         if (bindingResult.hasErrors()) {
             return "login";
         }

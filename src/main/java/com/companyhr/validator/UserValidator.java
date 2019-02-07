@@ -49,4 +49,28 @@ public class UserValidator implements Validator {
             errors.rejectValue("passwordConfirm", "Diff.userForm.jobId");
         }
     }
+
+    public void validatelogin(Object o, Errors errors) {
+        EmployeeCredentials user = (EmployeeCredentials) o;
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
+        if (user.getUsername().length() < 6 || user.getUsername().length() > 32) {
+            errors.rejectValue("username", "Size.userForm.username");
+            return;
+        }
+        if (!employeeCredentialsService.findByUsername(user.getUsername())) {
+            errors.rejectValue("username", "Duplicate.userForm.username");
+            return;
+        }
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
+        if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
+            errors.rejectValue("password", "Size.userForm.password");
+            return;
+        }
+
+        if (!user.getPasswordConfirm().equals(user.getPassword())) {
+            errors.rejectValue("passwordConfirm", "Diff.userForm.jobId");
+        }
+    }
 }
