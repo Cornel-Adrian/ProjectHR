@@ -54,7 +54,6 @@ public class FileDownloadController{
             mimeType = "application/octet-stream";
         }
 
-
         System.out.println("mimetype : "+mimeType);
 
         response.setContentType(mimeType);

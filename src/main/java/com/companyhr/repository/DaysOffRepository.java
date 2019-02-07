@@ -9,6 +9,5 @@ import java.util.List;
 @Repository
 public interface DaysOffRepository extends JpaRepository<DaysOff, Long> {
 
-    List<DaysOff> findAllByCreatedAtIsNotNull();
     List<DaysOff> findByemployeeId(long id);
 }
