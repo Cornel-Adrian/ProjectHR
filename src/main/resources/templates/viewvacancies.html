@@ -3,17 +3,36 @@
 <head>
     <title>View days off</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="/css/common.css" th:href="@{/css/registration.css}" type="text/css" rel="stylesheet"/>
+    <link href="/css/common.css" th:href="@{/css/viewvacancies.css}" type="text/css" rel="stylesheet"/>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
-    <link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-          rel="stylesheet">
+    <style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+tr:nth-child(odd) {background-color: #ffffcc;}
+
+
+
+    </style>
 </head>
 <body>
-<p> In Method</p>
-    <h2>Vacancies </h2>
+<p> Welcome to your personal vacation history</p>
+<h2> List of Vacancies </h2>
     <table class="table table-striped table-bordered">
         <thead>
         <tr>

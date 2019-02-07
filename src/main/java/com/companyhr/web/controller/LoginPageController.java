@@ -80,7 +80,7 @@ public class LoginPageController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        
+
         employeeService.save(employeeCredentials);
 
         securityService.autologin(employeeCredentials.getUsername(), employeeCredentials.getPassword());
@@ -138,17 +138,6 @@ public class LoginPageController {
         return "redirect:/setcredits";
     }
 
-
-    /*@RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
-        model.addAttribute("userForm", new EmployeeCredentials());
-        if (bindingResult.hasErrors()) {
-            return "error";
-        }
-        securityService.autologin(employeeCredentials.getUsername(), employeeCredentials.getPassword());
-
-        return "redirect:/home";
-    }*/
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
         model.addAttribute("userForm", new EmployeeCredentials());
@@ -157,11 +146,12 @@ public class LoginPageController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
-        userValidator.validate(employeeCredentials, bindingResult);
+    public String dologin(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
+//        userValidator.validate(employeeCredentials, bindingResult);
         if (bindingResult.hasErrors()) {
             return "login";
         }
+
         UserDetails userDetails = userDetailsService.loadUserByUsername(employeeCredentials.getUsername());
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, employeeCredentials.getPassword(), userDetails.getAuthorities());
         securityService.autologin(employeeCredentials.getUsername(), employeeCredentials.getPassword());
@@ -169,36 +159,12 @@ public class LoginPageController {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         EmployeeCredentials employeeCredentials1 = employeeCredentialsRepository.findByUsername(((UserDetails) principal).getUsername());
         if ((employeeCredentials1.getJobId() == 2)) {
-            return "/restricted/hrhomepage";
+            return "redirect:/restricted/hrhomepage";
         }
-        if (employeeCredentials.getJobId() == 1) {
-            return "restricted/adminhomepage";
+        if (employeeCredentials1.getJobId() == 1) {
+            return "redirect:/restricted/adminhomepage";
         }
-        return "/restricted/userhomepage";
+        return "redirect:/restricted/userhomepage";
     }
-
-
-        /*if (usernamePasswordAuthenticationToken.isAuthenticated()) {
-            return "redirect:/restricted/afterlogin";
-        } else {
-            return "login";
-        }*/
-
-    }
-
-
-  /*  public String loginprocess(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials) {
-        /*if (error != null)
-            model.addAttribute("message", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");*/
-
-
-
-   /* public String welcome(Model model) {
-        return "welcome";
-    }
-}*/
-
+}
 

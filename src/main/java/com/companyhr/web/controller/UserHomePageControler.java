@@ -30,21 +30,13 @@ public class UserHomePageControler {
     @Autowired
     EmployeeDetails employeeDetails;
 
-    /*@RequestMapping(value = "/viewpersonaldetails", method = RequestMethod.GET)
-
-    public ModelAndView viewpersonaldetails(){
-            return new ModelAndView("restricted/viewpersonaldetails", "employeeDetails", new EmployeeDetails());
-        }*/
 
     @RequestMapping(value = "/viewpersonaldetails", method = RequestMethod.GET)
     public ModelAndView viewpersonaldetails(Model model) {
 
 
         //@GetMapping(value = "/viewpersonaldetails")
-        //public String viewpersonaldetails(@ModelAttribute("employeeDetails") EmployeeDetails employeeDetails, Model model) {
 
-        //public String viewpersonaldetails(ModelMap map) {
-        // EmployeeDetails employeeDetails= new EmployeeDetails();
         String username1;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
@@ -75,10 +67,7 @@ public class UserHomePageControler {
             employeeDetails.setEmployeeid(employeeCredentials.getEmployeeId().toString());
             employeeDetails.setDeparmentid(newEmployee.getDepartmentId().toString());
             employeeDetails.setSalary(newEmployee.getSalary().toString());
-            //map.put("employeeDetails",employeeDetails);
             model.addAttribute("employeeDetails", employeeDetails);
-
-            //   map.addAttribute("employeeDetails", employeeDetails);
 
 
         }

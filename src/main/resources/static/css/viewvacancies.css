@@ -1,0 +1,26 @@
+body {
+ background-color: lightblue;
+}
+
+
+p {
+color: white;
+	margin: 5px;
+	padding: 5px;
+	font-weight: bold;
+	font-family: 'Cookie';
+	font-size: 35px;
+	text-align: center;
+	padding: 0;
+	text-shadow: none;
+}
+
+.form-container{
+margin: 5px;
+	padding: 5px;
+	font-family: 'Cookie';
+	font-size: 20px;
+	text-align: right;
+	padding: 0;
+	text-shadow: none;
+}

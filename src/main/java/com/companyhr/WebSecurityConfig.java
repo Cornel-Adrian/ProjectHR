@@ -38,12 +38,11 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .and()
+                //.csrf()
+                //.and()
                 .authorizeRequests()
                 .antMatchers("/", "/api/notes/", "/greeting", "/result", "/resources/**",
                         "/registration", "/welcome", "/accesdenied").permitAll()
-                //.antMatchers("/restricted/**").hasRole("ADMIN")
                 .antMatchers("/home").hasRole("ADMIN")
                 .antMatchers("/restricted/userhomepage").authenticated()
                 .antMatchers("/addholidayhr").hasRole("HR")
@@ -59,6 +58,8 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .failureUrl("/accesdenied")
+                .loginProcessingUrl("/dologin")
+                .defaultSuccessUrl("/restricted/userhomepage", false)
                 .permitAll()
                 .and()
                 .logout()
