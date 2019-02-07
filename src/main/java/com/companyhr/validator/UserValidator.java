@@ -2,6 +2,7 @@ package com.companyhr.validator;
 
 
 import com.companyhr.model.EmployeeCredentials;
+import com.companyhr.repository.EmployeeCredentialsRepository;
 import com.companyhr.service.EmployeeCredentialsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,8 @@ import org.springframework.validation.Validator;
 
 @Component
 public class UserValidator implements Validator {
-
+    @Autowired
+    EmployeeCredentialsRepository employeeCredentialsRepository;
     @Autowired
     private EmployeeCredentialsService employeeCredentialsService;
 
@@ -62,15 +64,15 @@ public class UserValidator implements Validator {
             errors.rejectValue("username", "Duplicate.userForm.username");
             return;
         }
-
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "Size.userForm.password");
             return;
         }
+       /* EmployeeCredentials employeeCredentials= employeeCredentialsRepository.findByUsername(user.getUsername());
 
-        if (!user.getPasswordConfirm().equals(user.getPassword())) {
+        if (!employeeCredentials.getPasswordConfirm().equals(user.getPassword())) {
             errors.rejectValue("passwordConfirm", "Diff.userForm.jobId");
-        }
+        }*/
     }
 }
