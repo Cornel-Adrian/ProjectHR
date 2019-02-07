@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Controller
-public class addholidayhrPageController {
+public class AddHolidayHrPageController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
