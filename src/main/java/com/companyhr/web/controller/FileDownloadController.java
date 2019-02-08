@@ -57,12 +57,21 @@ public class FileDownloadController{
 
             if(classloader.getResource(INTERNAL_FILE).getFile() != null){
                 file = new File(classloader.getResource(INTERNAL_FILE).getFile());
-
             }else{
                 file = new File(EXTERNAL_FILE_PATH);
             }
 
-        Coh.writeCsvFile(file.getAbsolutePath(), listOfdays, credy);
+        if(type.equalsIgnoreCase("download")){
+            System.out.println("Download path.");
+            response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + file.getName() +"\""));
+            Coh.writeCsvFile(file.getAbsolutePath(), listOfdays, credy);
+        }else{
+            file = new File(EXTERNAL_FILE_PATH);
+            System.out.println("Browser path.");
+            response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
+        }
+
+
 
 
         if(!file.exists()){
@@ -84,13 +93,6 @@ public class FileDownloadController{
 
         response.setContentType(mimeType);
 
-        if(type.equalsIgnoreCase("download")){
-            System.out.println("Download path.");
-            response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + file.getName() +"\""));
-        }else{
-            System.out.println("Browser path.");
-            response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
-        }
         response.setContentLength((int)file.length());
         InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
         FileCopyUtils.copy(inputStream, response.getOutputStream());
