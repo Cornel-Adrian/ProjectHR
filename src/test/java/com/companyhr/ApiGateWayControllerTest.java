@@ -50,16 +50,20 @@ public class ApiGateWayControllerTest{
     @Test
     public void FetchRightDaysOff() throws Exception {
         createTestDaysOff(1L,2L,"asa am vrut",1L);
+        createTestDaysOff(2L,2L,"am ales sa fac asta",2L);
 
         // @formatter:off
         mvc.perform(get("/api/getalldaysoff").contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(1))))
+                .andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(2))))
                 .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[0].employeeId", is(2)))
-                .andExpect(jsonPath("$[0].reasonLeave", is("asa am vrut")));
+                .andExpect(jsonPath("$[0].reasonLeave", is("asa am vrut")))
+                .andExpect(jsonPath("$[1].id", is(2)))
+                .andExpect(jsonPath("$[1].employeeId", is(2)))
+                .andExpect(jsonPath("$[1].reasonLeave", is("am ales sa fac asta")));
         // @formatter:on
     }
 
