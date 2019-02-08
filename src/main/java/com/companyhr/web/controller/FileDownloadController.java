@@ -7,9 +7,19 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.companyhr.controller.CsvOutputHandler;
+import com.companyhr.model.DaysOff;
+import com.companyhr.model.EmployeeCredentials;
+import com.companyhr.repository.DaysOffRepository;
+import com.companyhr.repository.EmployeeCredentialsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
@@ -20,7 +30,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class FileDownloadController{
 
-    private static final String INTERNAL_FILE="its-all-connected.jpg";
+
+    @Autowired
+    DaysOffRepository daysOffRepository;
+
+    @Autowired
+    EmployeeCredentialsRepository employeeCredentialsRepository;
+
+    private static final String INTERNAL_FILE="output.csv";
     private static final String EXTERNAL_FILE_PATH="/home/securiter/Downloads/Proiect/app/src/main/resources/its-all-connected.jpg";
 
     /*
@@ -30,14 +47,23 @@ public class FileDownloadController{
      */
     @RequestMapping(value="/download/{type}", method = RequestMethod.GET)
     public void downloadFile(HttpServletResponse response, @PathVariable("type") String type) throws IOException {
+        List<DaysOff> listOfdays=daysOffRepository.findAll();
+        List<EmployeeCredentials> credy=employeeCredentialsRepository.findAll();
 
+        CsvOutputHandler Coh=new CsvOutputHandler();
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         File file = null;
-            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+
+
             if(classloader.getResource(INTERNAL_FILE).getFile() != null){
                 file = new File(classloader.getResource(INTERNAL_FILE).getFile());
+
             }else{
                 file = new File(EXTERNAL_FILE_PATH);
             }
+
+        Coh.writeCsvFile(file.getAbsolutePath(), listOfdays, credy);
+
 
         if(!file.exists()){
             String errorMessage = "Sorry. The file you are looking for does not exist";
