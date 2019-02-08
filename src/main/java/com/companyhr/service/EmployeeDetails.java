@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Service
 public class EmployeeDetails {
-    public String username;
+    private String username;
     private String name;
     private String role;
     private String employeeid;

@@ -125,7 +125,11 @@ public class EmployeePageController {
         daysOff.setDaysOffTypeId(Long.valueOf(1));
         daysOff.setStatus(Long.valueOf(0));
         daysOffRepository.save(daysOff);
-        return "/restricted/afterlogin";
+        if (employeeCredentialsRepository.findByUsername(username).getJobId() == 2) {
+            return "/restricted/hrhomepage";
+
+        }
+        return "/restricted/userhomepage";
     }
 
     @RequestMapping(value = "/userhomepage", method = RequestMethod.GET)
@@ -198,7 +202,15 @@ public class EmployeePageController {
         model.addAttribute("daysoff", employeeId);
         return "/restricted/viewcredits";
     }
+/*
+* private String username;
+    private String name;
+    private String role;
+    private String employeeid;
+    private String deparmentid;
+    private String salary;
 
+* */
 
 //    @RequestMapping (value = "/viewpersonaldetails", method = RequestMethod.POST)
 //    public String viewpersonaldetails(ModelMap model, @RequestParam String username, @RequestParam String name, @RequestMapping String role, @RequestMapping String employeeid, @RequestMapping String departmentid, @RequestMapping String salary){

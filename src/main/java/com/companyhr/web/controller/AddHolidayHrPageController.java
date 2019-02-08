@@ -2,6 +2,7 @@ package com.companyhr.web.controller;
 
 import com.companyhr.model.EmployeeCredentials;
 import com.companyhr.model.PublicHoliday;
+import com.companyhr.repository.EmployeeCredentialsRepository;
 import com.companyhr.repository.PublicHolidayRepository;
 import com.companyhr.service.EmployeeService;
 import com.companyhr.service.SecurityService;
@@ -39,6 +40,8 @@ public class AddHolidayHrPageController {
     private UserValidator userValidator;
 
     @Autowired
+    EmployeeCredentialsRepository employeeCredentialsRepository;
+    @Autowired
     private PublicHolidayRepository publicHolidayRepository;
     @Autowired
     private EmployeeService employeeService;
@@ -70,7 +73,10 @@ public class AddHolidayHrPageController {
 
         publicHolidayRepository.save(publicHoliday);
 
+        if (employeeCredentialsRepository.findByUsername(currentPrincipalName).getJobId() == 2) {
+            return "/restricted/hrhomepage";
 
-        return "redirect:/restricted/afterlogin";
+        }
+        return "/restricted/userhomepage";
     }
 }

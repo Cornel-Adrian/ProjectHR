@@ -11,19 +11,61 @@
     <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
+
+    <style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+tr:nth-child(odd) {background-color: #ffffcc;}
+
+
+
+
+
+
+    </style>
 </head>
 <body>
-<box class="box">
-    <p>These are your personal details</p>
+<p> Welcome to your personal details page</p>
+<p> You have: </p>
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Employee Id</th>
+        <th>Deparment Id</th>
+        <th>Salary</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${employeeDetails.empty}">
+        <td colspan="1"> No details found for user</td>
+    </tr>
+    <tr th:each="employeeDetail : ${employeeDetails}">
+        <td><span th:text="${employeeDetail.username}"> Username </span></td>
+        <td><span th:text="${employeeDetail.name}"> Name </span></td>
+        <td><span th:text="${employeeDetail.role}"> Role </span></td>
+        <td><span th:text="${employeeDetail.employeeid}"> Employee ID </span></td>
+        <td><span th:text="${employeeDetail.deparmentid}"> Department ID </span></td>
+        <td><span th:text="${employeeDetail.salary}"> Salary </span></td>
 
-    <body>
-    <table>
-        <tr>
-            <td th: text="${username}">${employeeDetails}</td>
-        </tr>
+    </tr>
+    </tbody>
+</table>
 
-    </table>
-    </body>
-</box>
 </body>
 </html>
