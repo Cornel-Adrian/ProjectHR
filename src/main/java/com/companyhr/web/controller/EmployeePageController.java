@@ -179,7 +179,7 @@ public class EmployeePageController {
         List<DaysOff> listOfdays=daysOffRepository.findAll();
 
         model.addAttribute("daysoff", listOfdays);
-        return "viewvacancies";
+        return "viewallvacancies";
     }
 
     @RequestMapping("/restricted/viewcredits")

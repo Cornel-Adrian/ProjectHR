@@ -27,9 +27,46 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 tr:nth-child(odd) {background-color: #ffffcc;}
 
 
+body {
+   background-repeat: no-repeat;
+   background-size: 1550px 700px;
+ background-color: lightblue;
+}
+.box{
+	width: 500px;
+	height: 500px;
+    position:absolute;
+  top:20%;
+  left:35%;
+text-align: center;
+   	box-sizing: border-box;
+	z-index: 1;
+	opacity: 1;
+	overflow: hidden;
+	font-family: 'Cookie';
+    	font-size: 30px;
+}
 
-
-
+        .button{
+  background-color: #00cc99;
+  border-radius: 2px;
+  width: 300px;
+  height:40px;
+  padding: 15px 32px;
+  margin: 4px 2px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight:bold;
+    color:black;
+}
+.button:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+}
     </style>
 </head>
 <body>
@@ -51,6 +88,8 @@ tr:nth-child(odd) {background-color: #ffffcc;}
     </tr>
     </tbody>
 </table>
-
+<form action="/redirect">
+    <input type="submit" value="Return to your personal page" class="button"/>
+</form>
 </body>
 </html>

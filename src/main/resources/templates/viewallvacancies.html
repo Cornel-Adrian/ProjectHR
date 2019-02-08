@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>User home - personal details</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/userhomepage.css}"/>
+    <title>View days off</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="/css/common.css" th:href="@{/css/viewvacancies.css}" type="text/css" rel="stylesheet"/>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
-
     <style>
 table {
   border-collapse: collapse;
@@ -29,7 +25,6 @@ th {
 
 tr:nth-child(even) {background-color: #f2f2f2;}
 tr:nth-child(odd) {background-color: #ffffcc;}
-
         .button{
   background-color: #00cc99;
   border-radius: 2px;
@@ -52,36 +47,27 @@ tr:nth-child(odd) {background-color: #ffffcc;}
 
 
 
-
-
     </style>
 </head>
 <body>
-<p> Welcome to your personal details page</p>
-<p> You have: </p>
+<p> Welcome to your personal vacation history</p>
+<h2> List of Vacancies </h2>
 <table class="table table-striped table-bordered">
     <thead>
     <tr>
-        <th>Username</th>
-        <th>Name</th>
-        <th>Role</th>
-        <th>Employee Id</th>
-        <th>Deparment Id</th>
-        <th>Salary</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${employeeDetails.empty}">
-        <td colspan="1"> No details found for user</td>
+    <tr th:if="${daysoff.empty}">
+        <td colspan="2"> No DaysOff found</td>
     </tr>
-    <tr th:each="employeeDetail : ${employeeDetails}">
-        <td><span th:text="${employeeDetail.username}"> Username </span></td>
-        <td><span th:text="${employeeDetail.name}"> Name </span></td>
-        <td><span th:text="${employeeDetail.role}"> Role </span></td>
-        <td><span th:text="${employeeDetail.employeeid}"> Employee ID </span></td>
-        <td><span th:text="${employeeDetail.deparmentid}"> Department ID </span></td>
-        <td><span th:text="${employeeDetail.salary}"> Salary </span></td>
-
+    <tr th:each="dayOff : ${daysoff}">
+        <td><span th:text="${dayOff.startDate}"> Start Date </span></td>
+        <td><span th:text="${dayOff.endDate}"> End Date</span></td>
+        <td><span th:text="${dayOff.reasonLeave}"> Reason</span></td>
     </tr>
     </tbody>
 </table>
