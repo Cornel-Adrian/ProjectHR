@@ -8,6 +8,7 @@ import com.companyhr.model.EmployeeCredentials;
 import com.companyhr.repository.DaysOffRepository;
 import com.companyhr.repository.EmployeeCredentialsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +31,8 @@ public class ApiGatewayController {
         return listOfdays;
     }
 
-    @RequestMapping(value = "getdaysoff/{employeeId}", method = RequestMethod.GET)
+    @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE, value = "getdaysoff/{employeeId}", method = RequestMethod.GET)
     public DaysOff getCustomerById(@PathVariable final Long employeeId) {
-
         List<EmployeeCredentials> credy=employeeCredentialsRepository.findAll();
         List<DaysOff> listy=daysOffRepository.findAll();
 
