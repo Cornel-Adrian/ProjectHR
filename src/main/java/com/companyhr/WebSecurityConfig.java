@@ -41,8 +41,8 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.csrf()
                 //.and()
                 .authorizeRequests()
-                .antMatchers("/", "/api/notes/", "/greeting", "/result", "/resources/**",
-                        "/registration", "/welcome", "/accesdenied").permitAll()
+                .antMatchers("/", "/greeting", "/result", "/resources/**",
+                        "/registration", "/welcome","/api/**", "/accesdenied").permitAll()
                 .antMatchers("/home").hasRole("ADMIN")
                 .antMatchers("/restricted/userhomepage").authenticated()
                 .antMatchers("/addholidayhr").hasRole("HR")

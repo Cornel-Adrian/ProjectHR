@@ -179,9 +179,6 @@ public class EmployeePageController {
         List<DaysOff> listOfdays=daysOffRepository.findAll();
 
         model.addAttribute("daysoff", listOfdays);
-       for(DaysOff days: listOfdays){
-           System.out.println(days.getReasonLeave());
-        }
         return "viewvacancies";
     }
 
