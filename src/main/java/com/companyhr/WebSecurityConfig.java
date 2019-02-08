@@ -53,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/viewvacancies").authenticated()
                 .antMatchers("/viewAllDaysOff").authenticated()
                 .antMatchers("/restricted/viewcredis").authenticated()
+                .antMatchers("/redirect").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
