@@ -42,10 +42,11 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.and()
                 .authorizeRequests()
                 .antMatchers("/", "/greeting", "/result", "/resources/**",
-                        "/registration", "/welcome","/api/**", "/accesdenied").permitAll()
-                .antMatchers("/home").hasRole("ADMIN")
+                        "/registration", "/welcome", "/api/**", "/accesdenied").permitAll()
+                .antMatchers("/home", "/init", "/restricted/adminhomepage", "/createhr").hasRole("ADMIN")
                 .antMatchers("/restricted/userhomepage").authenticated()
-                .antMatchers("/addholidayhr").hasRole("HR")
+                .antMatchers("/addholidayhr", "/restricted/hrhomepage", "/pendingusers"
+                        , "/registrationdetailshr", "/registrationpersonaldetailshr", "/allusersdetails", "/approvependingvacancies", "/approve").hasRole("HR")
                 .antMatchers("/restricted/afterlogin").authenticated()
                 .antMatchers("/restricted/viewpersonaldetails").authenticated()
                 .antMatchers("/registrationdetails").authenticated()

@@ -38,14 +38,14 @@ public class UserValidator implements Validator {
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "Size.userForm.password");
         }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeeId", "NotEmpty");
-        if (user.getEmployeeId().toString().length() < 1 || user.getEmployeeId().toString().length() > 32) {
-            errors.rejectValue("employeeId", "Size.userForm.employee_id");
-        }
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobId", "NotEmpty");
-        if (user.getJobId().toString().length() < 1 || user.getJobId().toString().length() > 32) {
-            errors.rejectValue("jobId", "Size.userForm.employeeId");
-        }
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeeId", "NotEmpty");
+//        if (user.getEmployeeId().toString().length() < 1 || user.getEmployeeId().toString().length() > 32) {
+//            errors.rejectValue("employeeId", "Size.userForm.employee_id");
+//        }
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobId", "NotEmpty");
+//        if (user.getJobId().toString().length() < 1 || user.getJobId().toString().length() > 32) {
+//            errors.rejectValue("jobId", "Size.userForm.employeeId");
+//        }
 
         if (!user.getPasswordConfirm().equals(user.getPassword())) {
             errors.rejectValue("passwordConfirm", "Diff.userForm.jobId");

@@ -104,26 +104,26 @@ public class EmployeePageController {
                 weekend++;
             }
         }
-
-
-        if (credits - (days - bankHoliday - weekend) <= 0) {
-
-            return "/restricted/afterlogin";
-        }
-
-        if (credits == 0) {
+        if (credits <= 0) {
             return "adddayoff";
         }
 
+        if (credits - (days - bankHoliday - weekend) <= 0) {
+
+            return "adddayoff";
+        }
+
+
         Long total = Long.valueOf(credits - ((days - bankHoliday) - weekend));
         EmployeeCredentials temp = employeeCredentialsRepository.findByUsername(username);
-        temp.setDaysOffCredits(total);
+//        temp.setDaysOffCredits(total);
         employeeCredentialsRepository.save(temp);
 
 
         daysOff.setEmployeeId(employeeCredentialsRepository.findByUsername(username).getEmployeeId());
         daysOff.setDaysOffTypeId(Long.valueOf(1));
         daysOff.setStatus(Long.valueOf(0));
+        daysOff.setNumberOfWorkDays((long) (days - bankHoliday - weekend));
         daysOffRepository.save(daysOff);
         if (employeeCredentialsRepository.findByUsername(username).getJobId() == 2) {
             return "/restricted/hrhomepage";
@@ -177,7 +177,12 @@ public class EmployeePageController {
             username = principal.toString();
         }
         List<DaysOff> listOfdays=daysOffRepository.findAll();
-
+        List<DaysOff> listOfApprovedDaysOff = new ArrayList<>();
+        for (DaysOff daysOff : listOfdays) {
+            if (daysOff.getStatus() == 1) {
+                listOfApprovedDaysOff.add(daysOff);
+            }
+        }
         model.addAttribute("daysoff", listOfdays);
         return "viewallvacancies";
     }

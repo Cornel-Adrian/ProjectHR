@@ -34,14 +34,18 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/addholidayhr").setViewName("addholidayhr");
         registry.addViewController("/restricted/userhomepage").setViewName("/restricted/userhomepage");
         registry.addViewController("/adddayoff").setViewName("adddayoff");
-        registry.addViewController("/setcredits").setViewName("setcredits");
         registry.addViewController("/viewvacancies").setViewName("viewvacancies");
         registry.addViewController("/restricted/hrhomepage").setViewName("/restricted/hrhomepage");
         registry.addViewController("/restricted/adminhomepage").setViewName("/restricted/adminhomepage");
         registry.addViewController("/restricted/viewcredits").setViewName("/restricted/viewcredits");
         registry.addViewController("/redirect").setViewName("/redirect");
+        registry.addViewController("/createhr").setViewName("/createhr");
+        registry.addViewController("/pendingusers").setViewName("/pendingusers");
+        registry.addViewController("/registrationpersonaldetailshr").setViewName("/registrationpersonaldetailshr");
+        registry.addViewController("/allusersdetails").setViewName("/allusersdetails");
+        registry.addViewController("/approvependingvacancies").setViewName("/approvependingvacancies");
+        registry.addViewController("/approve").setViewName("/approve");
 
-        //registry.addViewController("/logout").setViewName("logout");
 
 
     }

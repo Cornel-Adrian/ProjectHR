@@ -10,4 +10,6 @@ import java.util.List;
 public interface DaysOffRepository extends JpaRepository<DaysOff, Long> {
 
     List<DaysOff> findByemployeeId(long id);
+
+    List<DaysOff> findAllByEmployeeId(long id);
 }

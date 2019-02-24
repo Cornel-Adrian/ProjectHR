@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 @Controller
 public class LoginPageController {
@@ -57,8 +60,27 @@ public class LoginPageController {
         webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
+        List<EmployeeCredentials> employeeCredentialsList = employeeCredentialsRepository.findAll();
+
+        if (employeeCredentialsList.isEmpty()) {
+            EmployeeCredentials tempCredentials = new EmployeeCredentials();
+            Random random = new Random();
+
+            String username = String.valueOf(Math.abs(random.nextLong()));
+            tempCredentials.setUsername(username);
+            String password = String.valueOf(Math.abs(random.nextLong()));
+            tempCredentials.setPassword(bCryptPasswordEncoder.encode(password));
+            tempCredentials.setPasswordConfirm(bCryptPasswordEncoder.encode(password));
+            tempCredentials.setEmployeeId((long) -1);
+            tempCredentials.setJobId((long) 1);
+            employeeCredentialsRepository.save(tempCredentials);
+            securityService.autologin(username, password);
+            return "/init";
+        }
         model.addAttribute("userForm", new EmployeeCredentials());
 
         return "registration";
@@ -67,57 +89,61 @@ public class LoginPageController {
 
     @RequestMapping(value = "/registrationdetails", method = RequestMethod.GET)
     public String registrationdetails(Model model) {
+
         model.addAttribute("userForm", new Employee());
 
         return "registrationdetails";
     }
 
+//    @RequestMapping(value = "/setcredits", method = RequestMethod.GET)
+//    public String setCredits(Model model) {
+//        model.addAttribute("userForm", new EmployeeCredentials());
+//
+//        return "setcredits";
+//    }
+//
+//    @RequestMapping(value = "/setcredits", method = RequestMethod.POST)
+//    public String setCredits(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
+//
+//        String username;
+//
+//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        if (principal instanceof UserDetails) {
+//            username = ((UserDetails) principal).getUsername();
+//        } else {
+//            username = principal.toString();
+//        }
+//        employeeCredentials.setUsername(username);
+//        employeeCredentialsApiController.updateEmployeeCredentials(employeeCredentials);
+//        EmployeeCredentials employeeCredentials1 = employeeCredentialsRepository.findByUsername(username);
+//
+//        if (employeeCredentials1.getJobId() == 2) {
+//            return "redirect:/restricted/hrhomepage";
+//        }
+//        if (employeeCredentials1.getJobId() == 1) {
+//            return "redirect:/restricted/userhomepage";
+//        }
+//
+//        return "redirect:/restricted/userhomepage";
+//    }
+
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
+
         userValidator.validate(employeeCredentials, bindingResult);
-
-
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-
+        employeeCredentials.setJobId((long) 0);
+        Random random = new Random();
+        long employeeID = Math.abs(random.nextLong());
+        while (employeeCredentialsRepository.findByEmployeeId(employeeID) != null) {
+            employeeID = Math.abs(random.nextLong());
+        }
+        employeeCredentials.setEmployeeId(employeeID);
         employeeService.save(employeeCredentials);
-
         securityService.autologin(employeeCredentials.getUsername(), employeeCredentials.getPassword());
-
         return "redirect:/registrationdetails";
-    }
-
-    @RequestMapping(value = "/setcredits", method = RequestMethod.GET)
-    public String setCredits(Model model) {
-        model.addAttribute("userForm", new EmployeeCredentials());
-
-        return "setcredits";
-    }
-
-    @RequestMapping(value = "/setcredits", method = RequestMethod.POST)
-    public String setCredits(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
-
-        String username;
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails) principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        employeeCredentials.setUsername(username);
-        employeeCredentialsApiController.updateEmployeeCredentials(employeeCredentials);
-        EmployeeCredentials employeeCredentials1 = employeeCredentialsRepository.findByUsername(username);
-
-        if (employeeCredentials1.getJobId() == 2) {
-            return "redirect:/restricted/hrhomepage";
-        }
-        if (employeeCredentials1.getJobId() == 1) {
-            return "redirect:/restricted/userhomepage";
-        }
-
-        return "redirect:/restricted/userhomepage";
     }
 
     @RequestMapping(value = "/registrationdetails", method = RequestMethod.POST)
@@ -131,22 +157,26 @@ public class LoginPageController {
         employee.setJobId(employeeService.findByUsername(currentPrincipalName).getJobId());
         employee.setId(employeeService.findByUsername(currentPrincipalName).getId());
         EmployeeCredentials employeeCredentials = employeeCredentialsRepository.findByUsername(currentPrincipalName);
-        employeeCredentials.setDaysOffCredits(employee.getDaysOffCredits());
+        employeeCredentials.setDaysOffCredits(-1);
+        employee.setDaysOffCredits((long) -1);
+        employee.setExperience(-1);
+        employee.setSalary(-1.0);
 
+        employeeCredentialsApiController.updateEmployeeCredentials(employeeCredentials);
         employeeService.save(employee);
 
-        return "redirect:/setcredits";
+        return "redirect:/redirect";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
         model.addAttribute("userForm", new EmployeeCredentials());
-
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String dologin(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
+
         userValidator.validatelogin(employeeCredentials, bindingResult);
         if (bindingResult.hasErrors()) {
             return "login";

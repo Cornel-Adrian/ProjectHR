@@ -71,9 +71,9 @@ tr:nth-child(odd) {background-color: #ffffcc;}
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${employeeDetails.empty}">
-        <td colspan="1"> No details found for user</td>
-    </tr>
+    <!--<tr th:if="${employeeDetails.empty}">-->
+    <!--<td colspan="1"> No details found for user</td>-->
+    <!--</tr>-->
     <tr th:each="employeeDetail : ${employeeDetails}">
         <td><span th:text="${employeeDetail.username}"> Username </span></td>
         <td><span th:text="${employeeDetail.name}"> Name </span></td>

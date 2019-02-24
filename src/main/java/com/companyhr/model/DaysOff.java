@@ -31,6 +31,16 @@ public class DaysOff {
 
     @NotBlank
     private String reasonLeave;
+    @NotNull
+    private Long numberOfWorkDays;
+
+    public Long getNumberOfWorkDays() {
+        return numberOfWorkDays;
+    }
+
+    public void setNumberOfWorkDays(Long numberOfWorkDays) {
+        this.numberOfWorkDays = numberOfWorkDays;
+    }
 
     public String getReasonLeave() {
         return reasonLeave;
@@ -85,7 +95,6 @@ public class DaysOff {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
 
     public Long getStatus() {
         return status;

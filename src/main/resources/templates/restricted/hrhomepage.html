@@ -20,9 +20,9 @@ body {
 }
 .box{
 	width: 500px;
-	height: 500px;
+	height: 1000px;
     position:absolute;
-  top:20%;
+  top:0%;
   left:35%;
    text-align: center;
    	box-sizing: border-box;
@@ -66,7 +66,7 @@ body {
         <input type="submit" value="Add Bank Holiday" class="button"/>
     </form>
     <form action="/adddayoff">
-        <input type="submit" value="Request holiday" class="button"/>
+        <input type="submit" value="Request Holiday" class="button"/>
     </form>
     <form action="/restricted/viewcredits">
         <input type="submit" value="View Credits" class="button"/>
@@ -74,11 +74,27 @@ body {
     <form action="/viewpersonaldetails">
         <input type="submit" value="View Personal Details" class="button"/>
     </form>
+    <form action="/registrationpersonaldetailshr">
+        <input type="submit" value="Modify Personal Details" class="button"/>
+    </form>
+
+    </form>
+    <form action="/pendingusers">
+        <input type="submit" value="Fill In New Users Details" class="button"/>
+    </form>
+    </form>
+    <form action="/allusersdetails">
+        <input type="submit" value="Modify Users Details" class="button"/>
+    </form>
+
     <form action="/viewvacancies">
-        <input type="submit" value="View Personal Vacancies" class="button"/>
+        <input type="submit" value="View Personal Holidays" class="button"/>
     </form>
     <form action="/viewallvacancies">
-        <input type="submit" value="View All Employee Vacancies" class="button"/>
+        <input type="submit" value="View All Employee Holidays" class="button"/>
+    </form>
+    <form action="/approvependingvacancies">
+        <input type="submit" value="Manage Pending Holidays" class="button"/>
     </form>
 </box>
 </body>

@@ -39,7 +39,8 @@ public class Employee {
     private Double salary;
 
     @NotNull
-    private long daysOffCredits;
+    private Long daysOffCredits;
+
     @NotNull
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy.MM.dd")
@@ -47,14 +48,14 @@ public class Employee {
     @NotNull
     private Integer departmentId;
 
-    public long getDaysOffCredits() {
+    public Long getDaysOffCredits() {
         return daysOffCredits;
     }
 
     @NotNull
     private Integer experience;
 
-    public void setDaysOffCredits(long daysOffCredits) {
+    public void setDaysOffCredits(Long daysOffCredits) {
         this.daysOffCredits = daysOffCredits;
     }
 

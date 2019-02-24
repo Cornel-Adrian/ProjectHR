@@ -2,15 +2,10 @@ package com.companyhr.controller;
 
 import com.companyhr.model.DaysOff;
 import com.companyhr.model.EmployeeCredentials;
-import com.companyhr.repository.DaysOffRepository;
-import com.companyhr.repository.EmployeeCredentialsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 
 public class CsvOutputHandler {
@@ -30,13 +25,13 @@ public class CsvOutputHandler {
             System.out.println(credy);
             //Write a new student object list to the CSV file
             for (DaysOff dayOff : listy) {
-                Long id=dayOff.getEmployeeId();
+                Long id = dayOff.getEmployeeId();
 
-                EmployeeCredentials empy=credy.stream()
+                EmployeeCredentials empy = credy.stream()
                         .filter(emCred -> id.equals(emCred.getId()))
                         .findAny().orElse(null);
 
-                if(id != null) {
+                if (id != null) {
                     fileWriter.append(String.valueOf(id));
                     fileWriter.append(COMMA_DELIMITER);
                     if (empy != null) {
@@ -53,7 +48,7 @@ public class CsvOutputHandler {
                     fileWriter.append(COMMA_DELIMITER);
                     fileWriter.append(String.valueOf(dayOff.getReasonLeave()));
                     fileWriter.append(NEW_LINE_SEPARATOR);
-                }else{
+                } else {
                     throw new Exception();
                 }
             }

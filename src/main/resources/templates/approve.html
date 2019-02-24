@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Approve employee holiday</title>
+    <base href="/">
+    </meta>
+    <link href="/css/common.css" th:href="@{/css/registrationdetails.css}" type="text/css" rel="stylesheet"/>
+    <link href="../static/css/common.css" th:href="@{/css/registrationdetails.css}" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/registrationdetails.css}"/>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
+</head>
+<body>
+<div class="registrationbox">
+    <form action="#" th:action="@{/approve}" th:object="${daysOff}" method="post">
+        <p>Please review the holiday request details</p>
+        <p></p>
+        <p></p>
+        <input type="hidden" th:field="*{id}"/>
+        <p1 th:text="'EmployeeId: '+${daysOff.employeeId}"/>
+        </p1>
+        <input type="hidden" th:field="*{employeeId}"/>
+        <p></p>
+        <p1 th:text="'Start Date: '+${daysOff.startDate}"></p1>
+        <input type="hidden" th:field="*{startDate}"/>
+        <p></p>
+        <p1 th:text="'End Date: '+${daysOff.endDate}"></p1>
+        <input type="hidden" th:field="*{endDate}"/>
+        <p></p>
+        <p1 th:text="'Reason Leave: '+${daysOff.reasonLeave}"></p1>
+        <input type="hidden" th:field="*{reasonLeave}"/>
+        <p></p>
+        <p1 th:text="'Number of  Days: '+${daysOff.numberOfWorkDays}"></p1>
+        <input type="hidden" th:field="*{numberOfWorkDays}"/>
+        <p></p>
+        <input type="hidden" th:field="*{status}"/>
+        <input type="hidden" th:field="*{daysOffTypeId}"/>
+
+        <p></p>
+        <p1><input type="submit" value="Approve" class="button"/></p1>
+    </form>
+</div>
+</body>
+</html>

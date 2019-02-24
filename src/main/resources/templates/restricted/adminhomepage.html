@@ -1,11 +1,73 @@
 <!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>You are logged in</title>
+    <title>Admin home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/userhomepage.css}"/>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Cookie' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Arbutus Slab' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=IBM Plex Serif' rel='stylesheet'>
+    <style>
+body {
+   background-repeat: no-repeat;
+   background-size: 1550px 700px;
+ background-color: lightblue;
+}
+.box{
+	width: 500px;
+	height: 500px;
+    position:absolute;
+  top:20%;
+  left:35%;
+text-align: center;
+   	box-sizing: border-box;
+	z-index: 1;
+	opacity: 1;
+	overflow: hidden;
+	font-family: 'Cookie';
+    	font-size: 30px;
+}
+
+        .button{
+  background-color: #00cc99;
+  border-radius: 2px;
+  width: 300px;
+  height:40px;
+  padding: 15px 32px;
+  margin: 4px 2px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight:bold;
+    color:black;
+}
+.button:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+}
+
+
+
+    </style>
 </head>
 <body>
-<p> You have logged in to your account ->>>> Role: ADMIN</p>
-<a href="/logout"/>Logout</a></body>
+<box class="box">
+    <p>Welcome to the Admin Page</p>
+    <p>What would you like to do?</p>
+    <form action="/logout">
+        <input type="submit" value="Logout" class="button"/>
+    </form>
+    <form action="/createhr">
+        <input type="submit" value="Create HR account" class="button"/>
+    </form>
+
+</box>
 </body>
 </html>
