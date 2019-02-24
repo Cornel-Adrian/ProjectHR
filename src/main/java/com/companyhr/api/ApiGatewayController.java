@@ -12,16 +12,30 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * The Api gateway controller.
+ */
 @RestController
 @RequestMapping("/api/")
 public class ApiGatewayController {
 
+    /**
+     * The Days off repository.
+     */
     @Autowired
     DaysOffRepository daysOffRepository;
 
+    /**
+     * The Employee credentials repository.
+     */
     @Autowired
     EmployeeCredentialsRepository employeeCredentialsRepository;
 
+    /**
+     * Get all days off method.
+     *
+     * @return the list of days off
+     */
     @RequestMapping("getalldaysoff")
     public List<DaysOff> getalldaysoff() {
 
@@ -30,6 +44,12 @@ public class ApiGatewayController {
         return listOfdays;
     }
 
+    /**
+     * Gets customer by id.
+     *
+     * @param employeeId the employee id
+     * @return the customer by id
+     */
     @RequestMapping(value = "getdaysoff/{employeeId}", method = RequestMethod.GET)
     public DaysOff getCustomerById(@PathVariable final Long employeeId) {
 
