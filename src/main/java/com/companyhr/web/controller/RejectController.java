@@ -16,26 +16,53 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 
+/**
+ * The Reject controller.
+ */
 @Controller
 public class RejectController {
-    @Autowired
+	/**
+	 * The Employee repository.
+	 */
+	@Autowired
     EmployeeRepository employeeRepository;
-    @Autowired
+	/**
+	 * The Employee credentials repository.
+	 */
+	@Autowired
     EmployeeCredentialsRepository employeeCredentialsRepository;
-    @Autowired
+	/**
+	 * The Employee credentials api controller.
+	 */
+	@Autowired
     EmployeeCredentialsApiController employeeCredentialsApiController;
-    @Autowired
+	/**
+	 * The Days off repository.
+	 */
+	@Autowired
     DaysOffRepository daysOffRepository;
 
-    @InitBinder
+	/**
+	 * Init binder.
+	 *
+	 * @param webDataBinder the web data binder
+	 */
+	@InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         webDataBinder.registerCustomEditor(java.util.Date.class, new CustomDateEditor(dateFormat, true));
     }
 
-    @RequestMapping(value = "/reject/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable Long id, Model model) {
+	/**
+	 * Reject method GET mapping, for rejecting days off requests.
+	 *
+	 * @param id    the id
+	 * @param model the model
+	 * @return the template
+	 */
+	@RequestMapping(value = "/reject/{id}", method = RequestMethod.GET)
+    public String rejectDayOff(@PathVariable Long id, Model model) {
 
         Optional<DaysOff> daysOffs = daysOffRepository.findById(id);
         if (daysOffRepository.findById(id).isPresent()) {
@@ -50,8 +77,16 @@ public class RejectController {
     }
 
 
-    @RequestMapping(value = "/reject", method = RequestMethod.POST)
-    public String updateuser(@ModelAttribute("dayOff") DaysOff daysOff, BindingResult bindingResult, Model model) {
+	/**
+	 * RejectDayOffSend method for POST mapping for rejecting days off requests.
+	 *
+	 * @param daysOff       the days off
+	 * @param bindingResult the binding result
+	 * @param model         the model
+	 * @return the template
+	 */
+	@RequestMapping(value = "/reject", method = RequestMethod.POST)
+    public String rejectDayOffSend(@ModelAttribute("dayOff") DaysOff daysOff, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "redirect:/error";

@@ -16,18 +16,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Optional;
 
+/**
+ * The Registration details hr controller.
+ */
 @Controller
 
 public class RegistrationDetailsHrController {
-    @Autowired
+
+	@Autowired
     EmployeeRepository employeeRepository;
-    @Autowired
+
+	@Autowired
     EmployeeCredentialsRepository employeeCredentialsRepository;
-    @Autowired
+
+	@Autowired
     EmployeeCredentialsApiController employeeCredentialsApiController;
 
-    @RequestMapping(value = "/registrationdetailshr/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable Long id, Model model) {
+	/**
+	 * ReturnEmployee method that returns specific employee based on id
+	 *
+	 * @param id    the employee id
+	 * @param model the model
+	 * @return the template
+	 */
+	@RequestMapping(value = "/registrationdetailshr/{id}", method = RequestMethod.GET)
+    public String returnEmployee(@PathVariable Long id, Model model) {
         Optional<Employee> employee = null;
         if (employeeRepository.findById(id).isPresent()) {
             employee = employeeRepository.findById(id);
@@ -38,12 +51,16 @@ public class RegistrationDetailsHrController {
     }
 
 
-    @RequestMapping(value = "/registrationdetailshr", method = RequestMethod.POST)
+	/**
+	 * Updateuser method that updaate users based on input.
+	 *
+	 * @param employee      the employee object
+	 * @param bindingResult the binding result validation
+	 * @param model         the model
+	 * @return the string
+	 */
+	@RequestMapping(value = "/registrationdetailshr", method = RequestMethod.POST)
     public String updateuser(@ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model) {
-
-//        if(bindingResult.hasErrors()){
-//            return "redirect:/registrationdetailshr";
-//        }
 
         employeeRepository.save(employee);
         if (employeeCredentialsRepository.findById(employee.getId()).isPresent()) {

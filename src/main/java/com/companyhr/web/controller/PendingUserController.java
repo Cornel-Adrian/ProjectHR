@@ -10,13 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Pending user controller.
+ */
 @Controller
 public class PendingUserController {
-    @Autowired
+	/**
+	 * The Employee repository.
+	 */
+	@Autowired
     EmployeeRepository employeeRepository;
 
-    @RequestMapping("/pendingusers")
-    public String viewAllVacancies(Model model) {
+	/**
+	 * View all pending users.
+	 *
+	 * @param model the model
+	 * @return the template
+	 */
+	@RequestMapping("/pendingusers")
+    public String viewAllPendingUsers(Model model) {
         List<Employee> allEmployees = employeeRepository.findAll();
         List<Employee> pendingEmployees = new ArrayList<>();
         for (Employee e : allEmployees) {

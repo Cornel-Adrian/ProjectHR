@@ -30,6 +30,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * The Login and Registration controller.
+ */
 @Controller
 public class LoginPageController {
     @Autowired
@@ -47,13 +50,18 @@ public class LoginPageController {
     @Autowired
     private UserValidator userValidator;
 
-    @Autowired
+	@Autowired
     EmployeeCredentialsRepository employeeCredentialsRepository;
 
-    @Autowired
+	@Autowired
     EmployeeCredentialsApiController employeeCredentialsApiController;
 
-    @InitBinder
+	/**
+	 * Init binder.
+	 *
+	 * @param webDataBinder the web data binder
+	 */
+	@InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
@@ -62,7 +70,13 @@ public class LoginPageController {
 
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+	/**
+	 * The registration method which checks for existing users and if none is found, it redirects to the init method
+	 *
+	 * @param model the model
+	 * @return the template
+	 */
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         List<EmployeeCredentials> employeeCredentialsList = employeeCredentialsRepository.findAll();
 
@@ -84,10 +98,15 @@ public class LoginPageController {
         model.addAttribute("userForm", new EmployeeCredentials());
 
         return "registration";
-
     }
 
-    @RequestMapping(value = "/registrationdetails", method = RequestMethod.GET)
+	/**
+	 * Registrationdetails GET method.
+	 *
+	 * @param model the model
+	 * @return the template
+	 */
+	@RequestMapping(value = "/registrationdetails", method = RequestMethod.GET)
     public String registrationdetails(Model model) {
 
         model.addAttribute("userForm", new Employee());
@@ -95,39 +114,15 @@ public class LoginPageController {
         return "registrationdetails";
     }
 
-//    @RequestMapping(value = "/setcredits", method = RequestMethod.GET)
-//    public String setCredits(Model model) {
-//        model.addAttribute("userForm", new EmployeeCredentials());
-//
-//        return "setcredits";
-//    }
-//
-//    @RequestMapping(value = "/setcredits", method = RequestMethod.POST)
-//    public String setCredits(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
-//
-//        String username;
-//
-//        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        if (principal instanceof UserDetails) {
-//            username = ((UserDetails) principal).getUsername();
-//        } else {
-//            username = principal.toString();
-//        }
-//        employeeCredentials.setUsername(username);
-//        employeeCredentialsApiController.updateEmployeeCredentials(employeeCredentials);
-//        EmployeeCredentials employeeCredentials1 = employeeCredentialsRepository.findByUsername(username);
-//
-//        if (employeeCredentials1.getJobId() == 2) {
-//            return "redirect:/restricted/hrhomepage";
-//        }
-//        if (employeeCredentials1.getJobId() == 1) {
-//            return "redirect:/restricted/userhomepage";
-//        }
-//
-//        return "redirect:/restricted/userhomepage";
-//    }
-
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+	/**
+	 * The Registration method which if successful redirects to the registration details method
+	 *
+	 * @param employeeCredentials the employee credentials model
+	 * @param bindingResult       the binding result validation
+	 * @param model               the model
+	 * @return the template
+	 */
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
 
         userValidator.validate(employeeCredentials, bindingResult);
@@ -146,12 +141,17 @@ public class LoginPageController {
         return "redirect:/registrationdetails";
     }
 
-    @RequestMapping(value = "/registrationdetails", method = RequestMethod.POST)
+	/**
+	 * Registrationdetails POST method which redirects to the Redirect controller
+	 *
+	 * @param employee      the employee credentials model
+	 * @param bindingResult the binding result validation
+	 * @param model         the model
+	 * @return the template
+	 */
+	@RequestMapping(value = "/registrationdetails", method = RequestMethod.POST)
     public String registration(@ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model) {
 
-        /*if (bindingResult.hasErrors()) {
-            return "registrationdetails";
-        }*/
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         employee.setJobId(employeeService.findByUsername(currentPrincipalName).getJobId());
@@ -168,13 +168,27 @@ public class LoginPageController {
         return "redirect:/redirect";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+	/**
+	 * Login GET Method.
+	 *
+	 * @param model the model
+	 * @return the template
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
         model.addAttribute("userForm", new EmployeeCredentials());
         return "login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+	/**
+	 * Dologin POST Method which verfies user credentials and redirects to the appropriate user management page
+	 *
+	 * @param employeeCredentials the employee credentials model
+	 * @param bindingResult       the binding result validation
+	 * @param model               the model
+	 * @return the template
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
     public String dologin(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
 
         userValidator.validatelogin(employeeCredentials, bindingResult);

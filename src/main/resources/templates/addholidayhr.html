@@ -26,12 +26,26 @@
         <p1><input type="text" name="name"/></p1>
 
         <p>Start Date</p>
-        <p1><input type="date" name="startDate"/></p1>
+        <p1><input type="date" name="startDate" id="startDate"/></p1>
         <p>End Date</p>
-        <p1><input type="date" name="endDate"/></p1>
+        <p1><input type="date" id="endDate" name="endDate"/></p1>
         <p></p>
-        <p1><input type="submit" value="Submit" class="button"/></p1>
+        <p1><input type="submit" value="Submit" id="btnSend" class="button"/></p1>
     </form>
 </div>
+<script>
+    var x = document.getElementById("startDate");
+    var y =document.getElementById("endDate");
+
+    y.onchange = function() {endDateCheck()};
+    x.onchange = function() {startDateCheck()};
+
+    function startDateCheck() {
+        x.value < y.value ? document.getElementById("btnSend").disabled = false : document.getElementById("btnSend").disabled = true;
+    }
+    function endDateCheck() {
+        x.value < y.value ? document.getElementById("btnSend").disabled = false : document.getElementById("btnSend").disabled = true;
+    }
+</script>
 </body>
 </html>

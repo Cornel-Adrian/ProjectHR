@@ -12,13 +12,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Pending holiday request controller.
+ */
 @Controller
 public class PendingHolidayRequestController {
 
-    @Autowired
+	@Autowired
     DaysOffRepository daysOffRepository;
 
-    @RequestMapping("/approvependingvacancies")
+	/**
+	 * View all pending holiday requests.
+	 *
+	 * @param model the model
+	 * @return template
+	 */
+	@RequestMapping("/approvependingvacancies")
     public String viewAllPendingHolidayRequests(Model model) {
         String username;
 

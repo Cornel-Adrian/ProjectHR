@@ -16,20 +16,38 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User home page controler.
+ */
 @Controller
 
 
 public class UserHomePageControler {
 
-    @Autowired
+	/**
+	 * The Employee credentials repository.
+	 */
+	@Autowired
     EmployeeCredentialsRepository employeeCredentialsRepository;
-    @Autowired
+	/**
+	 * The Employee repository.
+	 */
+	@Autowired
     EmployeeRepository employeeRepository;
-    @Autowired
+	/**
+	 * The Employee details.
+	 */
+	@Autowired
     EmployeeDetails employeeDetails;
 
 
-    @RequestMapping(value = "/viewpersonaldetails")
+	/**
+	 * Viewpersonaldetails method that allows the user to see their own personal details.
+	 *
+	 * @param model the model
+	 * @return the template
+	 */
+	@RequestMapping(value = "/viewpersonaldetails")
     public String viewpersonaldetails(Model model) {
 
 
@@ -72,20 +90,3 @@ public class UserHomePageControler {
         return "restricted/viewpersonaldetails";
     }
 }
-/*@RequestMapping("/restricted/viewcredits")
-    public String listcredits(Model model) {
-
-        String username;
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails) principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-
-        List<EmployeeCredentials> employeeId = Collections.singletonList(employeeCredentialsRepository.findByUsername(username));
-
-        model.addAttribute("daysoff", employeeId);
-        return "/restricted/viewcredits";
-    }*/

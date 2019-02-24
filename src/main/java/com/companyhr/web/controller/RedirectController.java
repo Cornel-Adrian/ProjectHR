@@ -9,12 +9,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * The Redirect controller.
+ */
 @Controller
 public class RedirectController {
-    @Autowired
+
+	@Autowired
     EmployeeCredentialsRepository employeeCredentialsRepository;
 
-    @RequestMapping(value = "/redirect")
+	/**
+	 * Return home method that redirects to the appropriate user menu depending on user job id.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
+	@RequestMapping(value = "/redirect")
     public String returnhome(Model model) {
 
 

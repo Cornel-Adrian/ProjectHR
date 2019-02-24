@@ -23,33 +23,58 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Calendar;
 import java.util.Random;
 
+/**
+ * The Initialisation controller for the first run of the application.
+ * @author HrManagerTeam
+ */
 @Controller
 
 public class InitController {
+    /**
+     * The Employee credentials repository.
+     */
     @Autowired
     EmployeeCredentialsRepository employeeCredentialsRepository;
+    /**
+     * The Employee repository.
+     */
     @Autowired
     EmployeeRepository employeeRepository;
-    @Autowired
-    EmployeeCredentialsApiController employeeCredentialsApiController;
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private UserDetailsService userDetailsService;
+
     @Autowired
     private EmployeeService employeeService;
+
     @Autowired
     private SecurityService securityService;
+
     @Autowired
     private UserValidator userValidator;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+
+    /**
+     * The initialisation method GET mapping
+     *
+     * @param model the model
+     * @return the template
+     *
+     */
     @RequestMapping(value = "/init", method = RequestMethod.GET)
     public String intialise(Model model) {
         model.addAttribute("userForm", new EmployeeCredentials());
         return "/init";
-
     }
 
+    /**
+     * The initialisation method POST mapping
+     *
+     * @param employeeCredentials the employee credentials model
+     * @param bindingResult       the binding result validation
+     * @param model               the model
+     * @return the template
+     */
     @RequestMapping(value = "/init", method = RequestMethod.POST)
     public String intialise(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
         userValidator.validate(employeeCredentials, bindingResult);
