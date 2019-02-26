@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Optional;
 
 
+/**
+ * Contains methods that allow HR user to register his/her's personal details
+ */
 @Controller
 
 public class HrPersonalDetailsController {
@@ -29,6 +32,12 @@ public class HrPersonalDetailsController {
     EmployeeCredentialsApiController employeeCredentialsApiController;
 
 
+    /**
+     * GET method for HR personal details editing
+     *
+     * @param model the model Employee
+     * @return mapping for for HR personal details editing page
+     */
     @RequestMapping(value = "/registrationpersonaldetailshr", method = RequestMethod.GET)
     public String edithrdetails(Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -49,6 +58,13 @@ public class HrPersonalDetailsController {
         return "registrationdetailshr";
     }
 
+    /**
+     *  POST method for HR personal details editing
+     * @param employee The current HR user
+     * @param bindingResult allows for  Validator to be applied, and adds binding-specific analysis and model building.
+     * @param model the model
+     * @return mapping for HR homepage
+     */
     @RequestMapping(value = "/registrationpersonaldetailshr", method = RequestMethod.POST)
     public String updateuser(@ModelAttribute("employee") Employee employee, BindingResult bindingResult, Model model) {
 

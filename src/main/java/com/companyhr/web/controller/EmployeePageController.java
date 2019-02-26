@@ -44,6 +44,10 @@ public class EmployeePageController {
     EmployeeCredentialsRepository employeeCredentialsRepository;
 
 
+    /**
+     * @param webDataBinder used for populating form object arguments of annotated handler methods.
+     *                      Used to parse date directly
+     */
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -51,6 +55,11 @@ public class EmployeePageController {
         webDataBinder.registerCustomEditor(java.util.Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+    /**
+     *  * Method that performs operations for holiday requests- GET method
+     * @param model the model
+     * @return mapping add holiday request if success
+     */
     @RequestMapping(value = "/adddayoff", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new DaysOff());
@@ -58,6 +67,13 @@ public class EmployeePageController {
         return "adddayoff";
     }
 
+    /**
+     * Method that performs operations for holiday requests- POST method
+     * @param daysOff the holiday request
+     * @param bindingResult allows for  Validator to be applied, and adds binding-specific analysis and model building.
+     * @param model the model
+     * @return mapping for user homepage if success
+     */
     @RequestMapping(value = "/adddayoff", method = RequestMethod.POST)
     public String registration(@ModelAttribute("daysOff") DaysOff daysOff, BindingResult bindingResult, Model model) {
 
@@ -84,10 +100,7 @@ public class EmployeePageController {
         List<CustomDate> between = publicHolidayConverter.getWorkCalendar(startDate, endDate);
         LocalDate startDateLocale = LocalDate.parse(simpleDateFormat.format(daysOff.getStartDate()), formatter);
         LocalDate endDateLocale = LocalDate.parse(simpleDateFormat.format(daysOff.getEndDate()), formatter);
-
-
         int days = (int) ChronoUnit.DAYS.between(startDateLocale, endDateLocale);
-
         int bankHoliday = 0;
         List<java.util.Date> serviceList = new ArrayList<>();
         List<PublicHoliday> allPublicHoliday = publicHolidayRepository.findAll();
@@ -96,7 +109,6 @@ public class EmployeePageController {
             bankHoliday += serviceList.size();
 
         }
-
         int weekend = 0;
 
         for (int i = 0; i < between.size(); i++) {
@@ -113,13 +125,9 @@ public class EmployeePageController {
             return "adddayoff";
         }
 
-
         Long total = Long.valueOf(credits - ((days - bankHoliday) - weekend));
         EmployeeCredentials temp = employeeCredentialsRepository.findByUsername(username);
-//        temp.setDaysOffCredits(total);
         employeeCredentialsRepository.save(temp);
-
-
         daysOff.setEmployeeId(employeeCredentialsRepository.findByUsername(username).getEmployeeId());
         daysOff.setDaysOffTypeId(Long.valueOf(1));
         daysOff.setStatus(Long.valueOf(0));
@@ -132,6 +140,11 @@ public class EmployeePageController {
         return "/restricted/userhomepage";
     }
 
+    /**
+     * Redirect towards the userhomepage- GET method
+     * @param model the model
+     * @return mapping for user home page
+     */
     @RequestMapping(value = "/userhomepage", method = RequestMethod.GET)
     public String userhomepage(Model model) {
         model.addAttribute("userForm", new EmployeeCredentials());
@@ -139,6 +152,14 @@ public class EmployeePageController {
         return "restricted/userhomepage";
     }
 
+    /**
+     * * Redirect towards the userhomepage- POST method
+     *
+     * @param employeeCredentials the model for employeecredentials
+     * @param bindingResult allows for  Validator to be applied, and adds binding-specific analysis and model building.
+     * @param model the model
+     * @return mapping for user home page
+     */
     @RequestMapping(value = "/userhomepage", method = RequestMethod.POST)
     public String userhomepage(@ModelAttribute("employeeCredentials") EmployeeCredentials employeeCredentials, BindingResult bindingResult, Model model) {
 
@@ -147,6 +168,11 @@ public class EmployeePageController {
     }
 
 
+    /**
+     * Allows a user to view his personal holiday history
+     * @param model the model
+     * @return mapping for viewing his history page
+     */
     @RequestMapping("/viewvacancies")
     public String countsList(Model model) {
 
@@ -165,18 +191,15 @@ public class EmployeePageController {
         return "viewvacancies";
     }
 
+    /**
+     * Allows a HR user to view the holiday history for all users - approved holiday requests
+     * @param model the model
+     * @return mapping for the viewallvacanies page
+     */
     @RequestMapping("/viewallvacancies")
     public String viewAllVacancies(Model model) {
 
-        String username;
-
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            username = ((UserDetails) principal).getUsername();
-        } else {
-            username = principal.toString();
-        }
-        List<DaysOff> listOfdays=daysOffRepository.findAll();
+        List<DaysOff> listOfdays = daysOffRepository.findAll();
         List<DaysOff> listOfApprovedDaysOff = new ArrayList<>();
         for (DaysOff daysOff : listOfdays) {
             if (daysOff.getStatus() == 1) {
@@ -187,6 +210,11 @@ public class EmployeePageController {
         return "viewallvacancies";
     }
 
+    /**
+     * Allows a user to view his/her credits
+     * @param model the model
+     * @return mapping for the viewcredits page
+     */
     @RequestMapping("/restricted/viewcredits")
     public String listcredits(Model model) {
 
@@ -204,24 +232,4 @@ public class EmployeePageController {
         model.addAttribute("daysoff", employeeId);
         return "/restricted/viewcredits";
     }
-/*
-* private String username;
-    private String name;
-    private String role;
-    private String employeeid;
-    private String deparmentid;
-    private String salary;
-
-* */
-
-//    @RequestMapping (value = "/viewpersonaldetails", method = RequestMethod.POST)
-//    public String viewpersonaldetails(ModelMap model, @RequestParam String username, @RequestParam String name, @RequestMapping String role, @RequestMapping String employeeid, @RequestMapping String departmentid, @RequestMapping String salary){
-//model.put("username", );
-//
-//}
-//
-//        return "restricted/userhomepage";
-    //}
-
-
 }

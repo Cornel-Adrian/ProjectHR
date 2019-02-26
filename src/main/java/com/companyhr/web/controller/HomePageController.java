@@ -1,16 +1,17 @@
 package com.companyhr.web.controller;
 
 
-import com.companyhr.model.Person;
 import com.companyhr.service.PersonService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Contains controller for home page
+ * Deprecated
+ * Replaced by Welcome page
+ */
 @Controller
 public class HomePageController {
 
@@ -19,6 +20,13 @@ public class HomePageController {
 
     private PersonService personService;
 
+    /**
+     * Mapping for the initial homepage(start of project)- now restricted to ADMIN ROLE users- now DEPRECATED
+     * Used to represent common endpoint in site map for authenticated users
+     *
+     * @param model the model
+     * @return Mapping for the initial homepage(start of project)- now DEPRECATED
+     */
     @GetMapping("/home")
     public String homePage(Model model) {
         model.addAttribute("appName", appName);

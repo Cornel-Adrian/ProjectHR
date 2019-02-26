@@ -10,6 +10,9 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+/**
+ * Methods that validate the user input data for login and registration purposes
+ */
 @Component
 public class UserValidator implements Validator {
     @Autowired
@@ -22,6 +25,10 @@ public class UserValidator implements Validator {
         return EmployeeCredentials.class.equals(aClass);
     }
 
+    /**
+     * @param o      the received object from the registration forms
+     * @param errors the generated errors
+     */
     @Override
     public void validate(Object o, Errors errors) {
         EmployeeCredentials user = (EmployeeCredentials) o;
@@ -38,20 +45,17 @@ public class UserValidator implements Validator {
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "Size.userForm.password");
         }
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeeId", "NotEmpty");
-//        if (user.getEmployeeId().toString().length() < 1 || user.getEmployeeId().toString().length() > 32) {
-//            errors.rejectValue("employeeId", "Size.userForm.employee_id");
-//        }
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobId", "NotEmpty");
-//        if (user.getJobId().toString().length() < 1 || user.getJobId().toString().length() > 32) {
-//            errors.rejectValue("jobId", "Size.userForm.employeeId");
-//        }
 
         if (!user.getPasswordConfirm().equals(user.getPassword())) {
             errors.rejectValue("passwordConfirm", "Diff.userForm.jobId");
         }
     }
 
+    /**
+     * Used for the login process because there is no password confirm in login from
+     * @param o Received param from the login form
+     * @param errors the generated errors
+     */
     public void validatelogin(Object o, Errors errors) {
         EmployeeCredentials user = (EmployeeCredentials) o;
 
@@ -69,10 +73,6 @@ public class UserValidator implements Validator {
             errors.rejectValue("password", "Size.userForm.password");
             return;
         }
-       /* EmployeeCredentials employeeCredentials= employeeCredentialsRepository.findByUsername(user.getUsername());
 
-        if (!employeeCredentials.getPasswordConfirm().equals(user.getPassword())) {
-            errors.rejectValue("passwordConfirm", "Diff.userForm.jobId");
-        }*/
     }
 }

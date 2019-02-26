@@ -16,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Contains methods for user role setting
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
@@ -25,6 +28,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    /**
+     * Setting the authority for a user
+     *
+     * @param username the username of the current logged in user
+     * @return user details with authority setting
+     * @throws UsernameNotFoundException
+     */
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

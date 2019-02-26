@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.util.Optional;
 
+/**
+ * Contains methods that allow HR users to approve holiday requests
+ */
 @Controller
 public class ApproveController {
     @Autowired
@@ -29,6 +32,10 @@ public class ApproveController {
     @Autowired
     DaysOffRepository daysOffRepository;
 
+    /**
+     * @param webDataBinder used for populating form object arguments of annotated handler methods.
+     *                      Used to parse date directly
+     */
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -36,6 +43,11 @@ public class ApproveController {
         webDataBinder.registerCustomEditor(java.util.Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+    /**
+     * @param id the id of the request
+     * @param model the holiday request
+     * @return mapping for approving the selected request
+     */
     @RequestMapping(value = "/approve/{id}", method = RequestMethod.GET)
     public String edit(@PathVariable Long id, Model model) {
 
@@ -52,6 +64,12 @@ public class ApproveController {
     }
 
 
+    /**
+     * @param daysOff the holiday request
+     * @param bindingResult allows for  Validator to be applied, and adds binding-specific analysis and model building.
+     * @param model the holiday request model
+     * @return redirect towards the HR homepage (page is accesible only to HR role users)
+     */
     @RequestMapping(value = "/approve", method = RequestMethod.POST)
     public String updateuser(@ModelAttribute("dayOff") DaysOff daysOff, BindingResult bindingResult, Model model) {
 

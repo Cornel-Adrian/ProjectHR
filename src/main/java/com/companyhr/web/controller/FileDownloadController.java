@@ -1,17 +1,4 @@
 package com.companyhr.web.controller;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URLConnection;
-import java.nio.charset.Charset;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
 
 import com.companyhr.controller.CsvOutputHandler;
 import com.companyhr.model.DaysOff;
@@ -19,14 +6,21 @@ import com.companyhr.model.EmployeeCredentials;
 import com.companyhr.repository.DaysOffRepository;
 import com.companyhr.repository.EmployeeCredentialsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.util.List;
+
+/**
+ * Contains controller for personal history download
+ */
 @Controller
 public class FileDownloadController{
 
@@ -40,10 +34,17 @@ public class FileDownloadController{
     private static final String INTERNAL_FILE="output.csv";
     private static final String EXTERNAL_FILE_PATH="/home/securiter/Downloads/Proiect/app/src/main/resources/its-all-connected.jpg";
 
-    /*
+    /**
      * Download a file from
-     *   - inside project, located in resources folder.
-     *   - outside project, located in File system somewhere.
+     * *   - inside project, located in resources folder.
+     * *   - outside project, located in File system somewhere.
+     *
+     * @param response the response
+     * @param type     the request type
+     * @throws IOException
+     */
+    /*
+     *
      */
     @RequestMapping(value="/download/{type}", method = RequestMethod.GET)
     public void downloadFile(HttpServletResponse response, @PathVariable("type") String type) throws IOException {
@@ -55,11 +56,11 @@ public class FileDownloadController{
         File file = null;
 
 
-            if(classloader.getResource(INTERNAL_FILE).getFile() != null){
-                file = new File(classloader.getResource(INTERNAL_FILE).getFile());
-            }else{
-                file = new File(EXTERNAL_FILE_PATH);
-            }
+        if(classloader.getResource(INTERNAL_FILE).getFile() != null){
+            file = new File(classloader.getResource(INTERNAL_FILE).getFile());
+        }else{
+            file = new File(EXTERNAL_FILE_PATH);
+        }
 
         if(type.equalsIgnoreCase("download")){
             System.out.println("Download path.");
@@ -70,8 +71,6 @@ public class FileDownloadController{
             System.out.println("Browser path.");
             response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
         }
-
-
 
 
         if(!file.exists()){

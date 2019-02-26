@@ -25,6 +25,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Handles operations that allow a HR user to add a publci holiday (Bank holiday)
+ * which will be used further in calculating the number of working days for each holiday request
+ */
 @Controller
 public class AddHolidayHrPageController {
     @Autowired
@@ -46,6 +50,10 @@ public class AddHolidayHrPageController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * @param webDataBinder used for populating form object arguments of annotated handler methods.
+     *                      Used to parse date directly
+     */
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -53,6 +61,10 @@ public class AddHolidayHrPageController {
         webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
+    /**
+     * @param model used to map the holiday request get method request
+     * @return the mapping for the adding a public holiday accessible only for users with HR role
+     */
     @RequestMapping(value = "/addholidayhr", method = RequestMethod.GET)
     public String addholidayhr(Model model) {
         model.addAttribute("userForm", new PublicHoliday());
@@ -60,6 +72,12 @@ public class AddHolidayHrPageController {
         return "addholidayhr";
     }
 
+    /**
+     * @param publicHoliday maps the public holiday
+     * @param bindingResult allows for  Validator to be applied, and adds binding-specific analysis and model building.
+     * @param model generate with GET
+     * @return the mapping for the adding a public holiday accessible only for users with HR role
+     */
     @RequestMapping(value = "/addholidayhr", method = RequestMethod.POST)
     public String addholidayhr(@ModelAttribute("publicholiday") PublicHoliday publicHoliday, BindingResult
             bindingResult, Model model) {

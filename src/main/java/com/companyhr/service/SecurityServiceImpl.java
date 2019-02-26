@@ -10,6 +10,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+/**
+ * Login security methods
+ */
 @Service
 public class SecurityServiceImpl implements SecurityService {
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
@@ -18,6 +21,11 @@ public class SecurityServiceImpl implements SecurityService {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    /**
+     * Finds de current logged in user - not really used in the current version
+     *
+     * @return the current logged in user
+     */
     @Override
     public String findLoggedInUsername() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
@@ -28,6 +36,11 @@ public class SecurityServiceImpl implements SecurityService {
         return null;
     }
 
+    /**
+     * Used to login users or to autologin initial initial in memory user for app initialisation
+     * @param username the username used to login
+     * @param password the password used to login
+     */
     @Override
     public void autologin(String username, String password) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -38,7 +51,6 @@ public class SecurityServiceImpl implements SecurityService {
         if (usernamePasswordAuthenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             logger.debug(String.format("Auto login %s successfully!", username));
-            System.out.println(String.format("Auto login %s successfully!", username));
         }
     }
 }
