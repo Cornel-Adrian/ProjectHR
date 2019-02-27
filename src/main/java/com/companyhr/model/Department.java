@@ -9,6 +9,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
+/**
+ * class Department defines the department of the employee
+ * id - the id
+ * name - the name of the department
+ * contains getter and setter methods
+ */
 @Entity
 @Table(name = "department")
 @EntityListeners(AuditingEntityListener.class)

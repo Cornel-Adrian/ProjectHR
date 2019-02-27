@@ -10,6 +10,17 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+/**
+ * class model the credentials for users
+ * id - stores the id
+ * employeeId - the id of the employee
+ * username - the user name for each employee
+ * password - the password for each username
+ * jobId - the id for jobs
+ * passwordConfirm - is the confirmation of password
+ * daysOffCredits - the credits for each employee
+ * contains getter and setter method
+ */
 @Entity
 @Table(name = "employee_credentials")
 @EntityListeners(AuditingEntityListener.class)
@@ -17,10 +28,10 @@ import java.util.Date;
         allowGetters = true)
 public class EmployeeCredentials {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
 
     @NotNull
     private Long employeeId;

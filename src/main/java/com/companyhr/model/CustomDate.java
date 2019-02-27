@@ -5,11 +5,23 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
+/**
+ * class CustomDate defines a custom date used for calendar operations
+ * date - stores the date
+ * bankHoliday - true date is a holiday; false - date is working day
+ * dayOfWeek - the day of the week
+ * contains getter and setter hashCode and equals methods
+ */
 public class CustomDate {
-    java.util.Date date;
-    Boolean bankHoliday;
-    String dayOfWeek;
+    private java.util.Date date;
+    private Boolean bankHoliday;
+    private String dayOfWeek;
 
+    /**
+     * constructor for CustomDate class
+     *
+     * @param dateAsString the date in a string format
+     */
     public CustomDate(String dateAsString) {
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -48,9 +60,7 @@ public class CustomDate {
             }
 
         } catch (
-                ParseException e)
-
-        {
+                ParseException e) {
             System.out.println(e.getMessage() + "- Invalid date");
         }
 

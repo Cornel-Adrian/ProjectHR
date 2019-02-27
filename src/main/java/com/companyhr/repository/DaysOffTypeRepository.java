@@ -5,9 +5,9 @@ import com.companyhr.model.DaysOffType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
-import java.util.List;
-
+/**
+ * class contains method for db the type of the days off
+ */
 @Repository
 public interface DaysOffTypeRepository extends JpaRepository<DaysOffType, Long> {
 

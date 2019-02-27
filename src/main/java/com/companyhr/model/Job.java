@@ -9,6 +9,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
+/**
+ * class Job defines the job of the employee
+ * id - stores the id
+ * name - the name of the job
+ * contains getter and setter methods
+ */
 @Entity
 @Table(name = "job")
 @EntityListeners(AuditingEntityListener.class)

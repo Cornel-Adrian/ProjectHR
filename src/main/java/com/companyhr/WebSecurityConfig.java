@@ -43,7 +43,7 @@ WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/greeting", "/result", "/resources/**",
                         "/registration", "/welcome", "/api/**", "/accesdenied").permitAll()
-                .antMatchers("/home", "/init", "/restricted/adminhomepage", "/createhr").hasRole("ADMIN")
+                .antMatchers("/init", "/restricted/adminhomepage", "/createhr").hasRole("ADMIN")
                 .antMatchers("/restricted/userhomepage").authenticated()
                 .antMatchers("/addholidayhr", "/restricted/hrhomepage", "/pendingusers"
                         , "/registrationdetailshr", "/registrationpersonaldetailshr", "/allusersdetails", "/approvependingvacancies", "/approve").hasRole("HR")

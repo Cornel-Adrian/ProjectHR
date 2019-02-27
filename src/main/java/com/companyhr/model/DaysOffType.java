@@ -9,6 +9,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
+/**
+ * class DaysOffType defines the holiday type of the employee
+ * id - stores the id
+ * name - the name of the day off
+ * contains getter and setter methods
+ */
 @Entity
 @Table(name = "days_off_type")
 @EntityListeners(AuditingEntityListener.class)

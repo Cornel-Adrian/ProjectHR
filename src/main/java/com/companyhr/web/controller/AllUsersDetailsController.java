@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 /**
- * Class holds method for viewing all the users that have incomplete details after registartion
+ * Class holds method for viewing all the users that have incomplete details after registration
  */
 @Controller
 public class AllUsersDetailsController {
@@ -19,7 +19,7 @@ public class AllUsersDetailsController {
 
     /**
      * @param model List of all employees with incomplete registration details
-     * @return mapping for the HR accesible page that allows user selection for further details completion
+     * @return mapping for the HR accessible page that allows user selection for further details completion
      */
     @RequestMapping("/allusersdetails")
     public String viewAllUserDetails(Model model) {

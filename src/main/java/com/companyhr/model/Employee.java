@@ -12,6 +12,20 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+/**
+ * class model for users
+ * id - stores the id
+ * firstName - the first name of the employee
+ * lastName - the last name of the employee
+ * address - the address of the employee
+ * jobId - the id for jobs
+ * salary - the salary of the employee
+ * daysOffCredits - the credits for each employee
+ * employmentDate - the start working date of the employee
+ * departmentId - the id department of the employee
+ * experience - job experience of the employee
+ * contains getter and setter method
+ */
 @Entity
 @Table(name = "employee")
 @EntityListeners(AuditingEntityListener.class)
@@ -20,7 +34,6 @@ import java.util.Date;
 public class Employee {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty

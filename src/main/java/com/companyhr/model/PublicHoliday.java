@@ -10,6 +10,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+/**
+ * class PublicHoliday defines the public holiday of the employee
+ * id - stores the id
+ * startDate - the first day of the public holiday
+ * endDate - the last day of the public holiday
+ * name - the name of the public holiday
+ * contains getter and setter methods
+ */
 @Entity
 @Table(name = "public_holiday")
 @EntityListeners(AuditingEntityListener.class)

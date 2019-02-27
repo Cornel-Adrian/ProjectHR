@@ -10,6 +10,16 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+/**
+ * class DaysOff defines the holiday period of the employee
+ * id - stores the id
+ * employeeId - the id of the employee
+ * startDate - the first day of the holiday
+ * endDate - the last day of the holiday
+ * reasonLeave - the reason for the holiday period requested
+ * numberOfWorkDays - the total of the working day requested as holidays
+ * contains getter and setter methods
+ */
 @Entity
 @Table(name = "days_off")
 @EntityListeners(AuditingEntityListener.class)
